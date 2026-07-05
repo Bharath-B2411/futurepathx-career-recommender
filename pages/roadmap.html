@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Career Roadmap – Future PathX</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    .roadmap-layout {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    @media(max-width:800px) {
+      .roadmap-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .roadmap-sidebar {
+      position: sticky;
+      top: 80px;
+      height: fit-content;
+    }
+
+    .career-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .career-btn {
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-sm);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text2);
+      cursor: pointer;
+      font-size: 0.88rem;
+      text-align: left;
+      transition: 0.2s;
+      font-family: var(--font-body);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .career-btn:hover,
+    .career-btn.active {
+      border-color: rgba(56, 189, 248, 0.35);
+      color: var(--text);
+      background: rgba(56, 189, 248, 0.07);
+    }
+
+    .career-btn.active {
+      color: var(--accent);
+    }
+
+    .roadmap-title {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin-bottom: 0.25rem;
+    }
+
+    .roadmap-sub {
+      color: var(--text2);
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .roadmap-progress {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .rp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .rp-label {
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .rp-pct {
+      font-family: var(--font-display);
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    .roadmap-steps {
+      position: relative;
+    }
+
+    .roadmap-steps::before {
+      content: '';
+      position: absolute;
+      left: 24px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--border);
+    }
+
+    .roadmap-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.25rem 1rem 1.25rem 0;
+      position: relative;
+    }
+
+    .step-circle {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--surface2);
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+      transition: 0.3s;
+      cursor: pointer;
+    }
+
+    .step-circle.done {
+      background: rgba(52, 211, 153, 0.15);
+      border-color: var(--accent3);
+    }
+
+    .step-circle.active {
+      background: rgba(56, 189, 248, 0.15);
+      border-color: var(--accent);
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
+    }
+
+    .step-body {
+      flex: 1;
+      padding-top: 0.5rem;
+    }
+
+    .step-title {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+
+    .step-title.done {
+      color: var(--accent3);
+      text-decoration: line-through;
+      opacity: 0.7;
+    }
+
+    .step-title.active {
+      color: var(--accent);
+    }
+
+    .step-desc {
+      color: var(--text2);
+      font-size: 0.85rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .step-resources {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .resource-pill {
+      padding: 0.2rem 0.65rem;
+      border-radius: 100px;
+      font-size: 0.75rem;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text2);
+      transition: 0.2s;
+    }
+
+    .resource-pill:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .step-check {
+      background: none;
+      border: none;
+      color: var(--text3);
+      cursor: pointer;
+      font-size: 0.8rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: 6px;
+      transition: 0.2s;
+      font-family: var(--font-body);
+      border: 1px solid var(--border);
+    }
+
+    .step-check:hover {
+      background: rgba(52, 211, 153, 0.1);
+      color: var(--accent3);
+      border-color: var(--accent3);
+    }
+
+    .step-check.done {
+      background: rgba(52, 211, 153, 0.15);
+      color: var(--accent3);
+      border-color: var(--accent3);
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="nav">
+    <div class="nav-brand">Future<span>PathX</span></div>
+    <div class="nav-links">
+      <a href="../index.html">Dashboard</a>
+      <a href="career-test.html">Career Test</a>
+      <a href="career-explorer.html">Explore Careers</a>
+      <a href="resume-builder.html">Resume Builder</a>
+      <a href="roadmap.html" class="active">Roadmap</a>
+      <a href="skill-gap.html">Skill Gap</a>
+      <a href="resources.html">Resources</a>
+    </div>
+    <div class="nav-user">
+      <div class="avatar">B</div><span>Bharath</span>
+    </div>
+  </nav>
+
+  <div class="page-hero">
+    <div class="container">
+      <h1>🗺️ Career Roadmap</h1>
+      <p>Step-by-step learning paths tailored to your target career. Track your progress as you go.</p>
+    </div>
+  </div>
+
+  <div class="roadmap-layout">
+    <div class="roadmap-sidebar">
+      <div class="card">
+        <div class="card-title">Choose Career</div>
+        <div class="career-list" id="careerList"></div>
+      </div>
+    </div>
+    <div id="roadmapMain"></div>
+  </div>
+
+  <div class="chat-widget">
+    <div class="chat-bubble" onclick="toggleChat()">💬</div>
+    <div class="chat-panel" id="chatPanel">
+      <div class="chat-header"><span>🤖 AI Career Assistant</span><button onclick="toggleChat()">✕</button></div>
+      <div class="chat-messages" id="chatMessages">
+        <div class="msg bot">Follow your roadmap and mark steps as done to track progress!</div>
+      </div>
+      <div class="chat-input"><input type="text" id="chatInput" placeholder="Ask me anything..."
+          onkeydown="if(event.key==='Enter') sendChat()"><button onclick="sendChat()">→</button></div>
+    </div>
+  </div>
+
+  <script src="../js/main.js"></script>
+  <script>
+    const roadmaps = {
+      'AI Engineer': {
+        icon: '🤖', desc: 'Master artificial intelligence from fundamentals to production deployment.',
+        steps: [
+          { icon: '🐍', title: 'Learn Python', desc: 'Master Python programming: syntax, OOP, functions, and standard libraries.', resources: ['Automate the Boring Stuff', 'Python.org Docs', 'freeCodeCamp'] },
+          { icon: '📐', title: 'Mathematics & Statistics', desc: 'Linear algebra, calculus, probability, and statistics for AI.', resources: ['Khan Academy', '3Blue1Brown', 'MIT OpenCourseWare'] },
+          { icon: '🗃️', title: 'Data Structures & Algorithms', desc: 'Arrays, trees, graphs, sorting, searching for technical interviews.', resources: ['LeetCode', 'GeeksforGeeks', 'Cracking the Coding Interview'] },
+          { icon: '📊', title: 'Machine Learning Basics', desc: 'Supervised, unsupervised learning, regression, classification, clustering.', resources: ['Coursera – Andrew Ng', 'Scikit-learn Docs', 'Fast.ai'] },
+          { icon: '🧠', title: 'Deep Learning', desc: 'Neural networks, CNNs, RNNs, transformers, and attention mechanisms.', resources: ['Deep Learning Specialization', 'PyTorch Tutorials', 'Papers With Code'] },
+          { icon: '💬', title: 'NLP & LLMs', desc: 'Natural language processing, BERT, GPT, and large language models.', resources: ['HuggingFace Course', 'Stanford NLP', 'LangChain Docs'] },
+          { icon: '🔧', title: 'ML Engineering & MLOps', desc: 'Model deployment, CI/CD for ML, monitoring, and serving at scale.', resources: ['MLflow', 'Kubeflow', 'Made With ML'] },
+          { icon: '🚀', title: 'Build AI Projects', desc: 'Create 3+ portfolio projects: chatbot, image classifier, recommendation system.', resources: ['Kaggle', 'GitHub Projects', 'Papers Reimplementation'] },
+          { icon: '💼', title: 'Apply for Jobs', desc: 'Polish resume, practice interviews, apply to internships and full-time roles.', resources: ['LinkedIn', 'AngelList', 'Glassdoor', 'Naukri'] },
+        ]
+      },
+      'Data Scientist': {
+        icon: '📊', desc: 'From data wrangling to advanced analytics and business insights.',
+        steps: [
+          { icon: '🐍', title: 'Python & R', desc: 'Data analysis with Python (Pandas, NumPy) and R for statistics.', resources: ['Kaggle Python Course', 'R for Data Science', 'DataCamp'] },
+          { icon: '🗃️', title: 'SQL & Databases', desc: 'Write complex SQL queries for data extraction and transformation.', resources: ['Mode Analytics SQL', 'SQLZoo', 'PostgreSQL Docs'] },
+          { icon: '📊', title: 'Data Visualization', desc: 'Create compelling charts with Matplotlib, Seaborn, Plotly, and Tableau.', resources: ['Tableau Public', 'Seaborn Gallery', 'Storytelling with Data'] },
+          { icon: '📐', title: 'Statistics & Probability', desc: 'Hypothesis testing, A/B testing, Bayesian statistics, distributions.', resources: ['StatQuest', 'Think Stats', 'Khan Academy'] },
+          { icon: '🤖', title: 'Machine Learning', desc: 'Regression, classification, clustering, feature engineering, model evaluation.', resources: ['Scikit-learn', 'Coursera ML', 'Hands-on ML Book'] },
+          { icon: '☁️', title: 'Big Data & Cloud', desc: 'Spark, Hadoop, AWS/GCP data services for large-scale processing.', resources: ['Databricks Academy', 'AWS Data Analytics', 'Google BigQuery'] },
+          { icon: '🚀', title: 'Build Portfolio Projects', desc: 'End-to-end projects: EDA, predictive modeling, dashboards, Kaggle competitions.', resources: ['Kaggle', 'DrivenData', 'Analytics Vidhya'] },
+          { icon: '💼', title: 'Apply for Jobs', desc: 'Prepare for data science interviews with case studies and SQL rounds.', resources: ['Interview Query', 'StrataScratch', 'Glassdoor'] },
+        ]
+      },
+      'Full Stack Developer': {
+        icon: '🌐', desc: 'Build complete web applications from frontend to backend and deployment.',
+        steps: [
+          { icon: '🌐', title: 'HTML, CSS & JavaScript', desc: 'Core web technologies: semantics, responsive design, ES6+ JavaScript.', resources: ['MDN Web Docs', 'freeCodeCamp', 'The Odin Project'] },
+          { icon: '⚛️', title: 'React / Vue.js', desc: 'Modern frontend framework: components, state, routing, hooks.', resources: ['React Docs', 'Scrimba React Course', 'Egghead.io'] },
+          { icon: '🔧', title: 'Node.js & Express', desc: 'Server-side JavaScript: REST APIs, middleware, authentication.', resources: ['Node.js Docs', 'Express Guide', 'Traversy Media'] },
+          { icon: '🗃️', title: 'Databases (SQL & NoSQL)', desc: 'PostgreSQL for relational data, MongoDB for documents, Redis for caching.', resources: ['PostgreSQL Tutorial', 'MongoDB University', 'Redis Docs'] },
+          { icon: '🔒', title: 'Authentication & Security', desc: 'JWT, OAuth, HTTPS, CORS, XSS protection, rate limiting.', resources: ['OWASP Top 10', 'Auth0 Docs', 'JWT.io'] },
+          { icon: '🐳', title: 'Docker & Deployment', desc: 'Containerize apps, deploy to Heroku, Vercel, Railway, or AWS.', resources: ['Docker Docs', 'Vercel Docs', 'Heroku Dev Center'] },
+          { icon: '🚀', title: 'Build Projects', desc: 'E-commerce site, social app, SaaS product – complete with deployment.', resources: ['GitHub', 'Dev.to Project Ideas', 'Hashnode'] },
+          { icon: '💼', title: 'Apply for Jobs', desc: 'Build resume, contribute to open source, apply for roles.', resources: ['LinkedIn', 'Remote OK', 'We Work Remotely'] },
+        ]
+      },
+      'UI/UX Designer': {
+        icon: '🎨', desc: 'Create beautiful, user-centered digital experiences.',
+        steps: [
+          { icon: '🎨', title: 'Design Fundamentals', desc: 'Color theory, typography, composition, and visual hierarchy.', resources: ['Canva Design School', 'Refactoring UI', 'The Futur'] },
+          { icon: '🖥️', title: 'Figma Mastery', desc: 'Components, auto-layout, prototyping, design systems in Figma.', resources: ['Figma Docs', 'DesignCourse', 'Figma Academy'] },
+          { icon: '🔍', title: 'User Research', desc: 'Interviews, surveys, usability testing, personas, journey maps.', resources: ['NNGroup Articles', 'IDEO Design Thinking', 'UX Planet'] },
+          { icon: '📐', title: 'Wireframing & Prototyping', desc: 'Low and high fidelity wireframes, interactive prototypes.', resources: ['Balsamiq Docs', 'Invision', 'Figma Prototyping'] },
+          { icon: '♿', title: 'Accessibility & Standards', desc: 'WCAG guidelines, inclusive design, color contrast, keyboard navigation.', resources: ['WebAIM', 'A11y Project', 'Google Material Design'] },
+          { icon: '📊', title: 'Design Systems', desc: 'Build scalable component libraries and style guides.', resources: ['Design Systems Repo', 'Storybook', 'Carbon Design'] },
+          { icon: '🚀', title: 'Build Portfolio', desc: 'Case studies showing your design process from research to final design.', resources: ['Behance', 'Dribbble', 'UX Collective'] },
+          { icon: '💼', title: 'Apply for Jobs', desc: 'Present your portfolio, practice design critiques, nail take-home challenges.', resources: ['LinkedIn', 'Designmodo Jobs', 'UX Jobs Board'] },
+        ]
+      }
+    };
+
+    let completed = JSON.parse(localStorage.getItem('roadmap-done') || '{}');
+    let current = 'AI Engineer';
+
+    function renderSidebar() {
+      const list = document.getElementById('careerList');
+      list.innerHTML = Object.keys(roadmaps).map(key => `
+    <button class="career-btn ${key === current ? 'active' : ''}" onclick="selectCareer('${key}')">
+      ${roadmaps[key].icon} ${key}
+    </button>`).join('');
+    }
+
+    function selectCareer(name) {
+      current = name;
+      renderSidebar();
+      renderRoadmap();
+    }
+
+    function toggleStep(career, idx) {
+      const key = `${career}-${idx}`;
+      completed[key] = !completed[key];
+      localStorage.setItem('roadmap-done', JSON.stringify(completed));
+      renderRoadmap();
+    }
+
+    function renderRoadmap() {
+      const rm = roadmaps[current];
+      const steps = rm.steps;
+      const doneCount = steps.filter((_, i) => completed[`${current}-${i}`]).length;
+      const pct = Math.round((doneCount / steps.length) * 100);
+
+      let firstActive = steps.findIndex((_, i) => !completed[`${current}-${i}`]);
+
+      document.getElementById('roadmapMain').innerHTML = `
+    <div>
+      <div class="roadmap-title">${rm.icon} ${current} Roadmap</div>
+      <div class="roadmap-sub">${rm.desc}</div>
+      <div class="roadmap-progress">
+        <div class="rp-header">
+          <span class="rp-label">Overall Progress</span>
+          <span class="rp-pct">${pct}% (${doneCount}/${steps.length} steps)</span>
+        </div>
+        <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:${pct}%"></div></div>
+      </div>
+      <div class="roadmap-steps">
+        ${steps.map((step, i) => {
+        const done = completed[`${current}-${i}`];
+        const active = !done && i === firstActive;
+        return `
+          <div class="roadmap-step">
+            <div class="step-circle ${done ? 'done' : active ? 'active' : ''}" onclick="toggleStep('${current}', ${i})">
+              ${done ? '✓' : step.icon}
+            </div>
+            <div class="step-body">
+              <div class="step-title ${done ? 'done' : active ? 'active' : ''}">Step ${i + 1}: ${step.title}</div>
+              <div class="step-desc">${step.desc}</div>
+              <div class="step-resources">
+                ${step.resources.map(r => `<span class="resource-pill">📚 ${r}</span>`).join('')}
+                <button class="step-check ${done ? 'done' : ''}" onclick="toggleStep('${current}', ${i})">
+                  ${done ? '✓ Completed' : '○ Mark Done'}
+                </button>
+              </div>
+            </div>
+          </div>`;
+      }).join('')}
+      </div>
+    </div>`;
+    }
+
+    renderSidebar();
+    renderRoadmap();
+  </script>
+</body>
+
+</html>

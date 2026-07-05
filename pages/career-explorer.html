@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Career Explorer – Future PathX</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/main.css">
+<style>
+.filter-bar { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 2rem; }
+.filter-btn {
+  padding: 0.45rem 1rem;
+  border-radius: 100px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text2);
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: 0.2s;
+  font-family: var(--font-body);
+}
+.filter-btn:hover, .filter-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(56,189,248,0.08); }
+.careers-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.25rem; }
+.career-detail-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.75rem;
+  transition: 0.3s;
+  cursor: pointer;
+}
+.career-detail-card:hover { border-color: rgba(56,189,248,0.35); transform: translateY(-4px); box-shadow: var(--glow); }
+.cdc-header { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1rem; }
+.cdc-icon { font-size: 2.5rem; flex-shrink: 0; }
+.cdc-info h3 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; margin-bottom: 0.2rem; }
+.cdc-domain {
+  font-size: 0.75rem; color: var(--accent); font-weight: 600;
+  background: rgba(56,189,248,0.1); padding: 0.2rem 0.6rem;
+  border-radius: 100px; display: inline-block;
+}
+.cdc-desc { color: var(--text2); font-size: 0.88rem; margin-bottom: 1rem; }
+.cdc-meta { display: flex; flex-direction: column; gap: 0.5rem; }
+.meta-row { display: flex; align-items: center; justify-content: space-between; font-size: 0.83rem; }
+.meta-label { color: var(--text3); }
+.meta-val { font-weight: 600; color: var(--text); }
+.meta-val.green { color: var(--accent3); }
+.meta-val.yellow { color: var(--warning); }
+.skills-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 1rem; }
+.skill-tag {
+  padding: 0.2rem 0.6rem;
+  background: var(--surface2);
+  border-radius: 6px;
+  font-size: 0.75rem;
+  color: var(--text2);
+  border: 1px solid var(--border);
+}
+.demand-bar { height: 5px; background: var(--surface2); border-radius: 10px; overflow: hidden; margin-top: 0.3rem; }
+.demand-fill { height: 100%; border-radius: 10px; }
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(8px); z-index: 300;
+  display: flex; align-items: center; justify-content: center; padding: 2rem;
+}
+.modal {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  max-width: 600px; width: 100%;
+  max-height: 85vh; overflow-y: auto;
+  padding: 2rem;
+}
+.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+.modal-title { font-family: var(--font-display); font-size: 1.4rem; font-weight: 800; }
+.modal-close { background: none; border: none; color: var(--text2); cursor: pointer; font-size: 1.3rem; }
+.info-section { margin-bottom: 1.5rem; }
+.info-section h4 { font-weight: 600; margin-bottom: 0.6rem; color: var(--accent); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px; }
+.hidden { display: none; }
+.search-bar {
+  width: 100%;
+  padding: 0.85rem 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  outline: none;
+  margin-bottom: 1.25rem;
+  transition: 0.2s;
+}
+.search-bar:focus { border-color: rgba(56,189,248,0.5); }
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-brand">Future<span>PathX</span></div>
+  <div class="nav-links">
+    <a href="../index.html">Dashboard</a>
+    <a href="career-test.html">Career Test</a>
+    <a href="career-explorer.html" class="active">Explore Careers</a>
+    <a href="resume-builder.html">Resume Builder</a>
+    <a href="roadmap.html">Roadmap</a>
+    <a href="skill-gap.html">Skill Gap</a>
+    <a href="resources.html">Resources</a>
+  </div>
+  <div class="nav-user"><div class="avatar">B</div><span>Bharath</span></div>
+</nav>
+
+<div class="page-hero">
+  <div class="container">
+    <h1>🔭 Career Explorer</h1>
+    <p>Browse 20+ in-demand careers with salary ranges, required skills, and future outlook.</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="container">
+    <input class="search-bar" type="text" placeholder="🔍 Search careers..." oninput="filterCareers(this.value)">
+    <div class="filter-bar" id="filterBar">
+      <button class="filter-btn active" onclick="setFilter('All', this)">All</button>
+      <button class="filter-btn" onclick="setFilter('Tech', this)">Tech</button>
+      <button class="filter-btn" onclick="setFilter('Data', this)">Data</button>
+      <button class="filter-btn" onclick="setFilter('Design', this)">Design</button>
+      <button class="filter-btn" onclick="setFilter('Management', this)">Management</button>
+      <button class="filter-btn" onclick="setFilter('Cloud', this)">Cloud</button>
+    </div>
+    <div class="careers-grid" id="careersGrid"></div>
+  </div>
+</div>
+
+<div class="modal-overlay hidden" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal" id="modalContent"></div>
+</div>
+
+<div class="chat-widget">
+  <div class="chat-bubble" onclick="toggleChat()">💬</div>
+  <div class="chat-panel" id="chatPanel">
+    <div class="chat-header"><span>🤖 AI Career Assistant</span><button onclick="toggleChat()">✕</button></div>
+    <div class="chat-messages" id="chatMessages"><div class="msg bot">Explore careers and click any card for detailed info!</div></div>
+    <div class="chat-input"><input type="text" id="chatInput" placeholder="Ask me anything..." onkeydown="if(event.key==='Enter') sendChat()"><button onclick="sendChat()">→</button></div>
+  </div>
+</div>
+
+<script src="../js/main.js"></script>
+<script>
+const careers = [
+  { icon: '🤖', name: 'AI / ML Engineer', domain: 'Tech', desc: 'Build intelligent systems using neural networks and machine learning algorithms.', salary: '₹8L – ₹30L', demand: 95, growth: 'Very High', skills: ['Python', 'TensorFlow', 'PyTorch', 'Deep Learning', 'NLP', 'Computer Vision'], jd: 'Design, develop, and deploy machine learning models and AI systems. Work with large datasets, build training pipelines, and deploy models to production environments.', tools: 'TensorFlow, PyTorch, Scikit-learn, Jupyter, Docker, Kubernetes', edu: 'B.Tech / M.Tech in CS/AI or equivalent' },
+  { icon: '📊', name: 'Data Scientist', domain: 'Data', desc: 'Extract insights from complex datasets using statistical methods and ML.', salary: '₹6L – ₹25L', demand: 90, growth: 'Very High', skills: ['Python', 'R', 'SQL', 'Statistics', 'Machine Learning', 'Tableau'], jd: 'Analyze large datasets to find patterns and insights that drive business decisions. Build predictive models and communicate findings to stakeholders.', tools: 'Python, R, SQL, Tableau, Power BI, Excel', edu: 'B.Tech / B.Sc in CS, Statistics, or Mathematics' },
+  { icon: '💻', name: 'Software Developer', domain: 'Tech', desc: 'Design and build scalable software applications and systems.', salary: '₹4L – ₹20L', demand: 88, growth: 'High', skills: ['JavaScript', 'Python', 'Java', 'React', 'Node.js', 'Git'], jd: 'Develop and maintain software applications. Write clean, efficient code and collaborate with cross-functional teams to deliver product features.', tools: 'VS Code, Git, JIRA, Docker, CI/CD tools', edu: 'B.Tech / B.E. in Computer Science or related field' },
+  { icon: '☁️', name: 'Cloud Architect', domain: 'Cloud', desc: 'Design and manage cloud infrastructure for scalable applications.', salary: '₹10L – ₹40L', demand: 85, growth: 'Very High', skills: ['AWS', 'Azure', 'GCP', 'Terraform', 'Docker', 'Kubernetes'], jd: 'Design cloud solutions that are secure, scalable, and cost-efficient. Migrate on-premise systems to the cloud and optimize existing infrastructure.', tools: 'AWS Console, Terraform, Ansible, CloudFormation', edu: 'B.Tech in CS with cloud certifications (AWS/Azure/GCP)' },
+  { icon: '🎨', name: 'UI/UX Designer', domain: 'Design', desc: 'Create beautiful, intuitive digital experiences for users.', salary: '₹4L – ₹18L', demand: 80, growth: 'High', skills: ['Figma', 'Adobe XD', 'Prototyping', 'User Research', 'Wireframing', 'CSS'], jd: 'Design user interfaces and experiences for web and mobile apps. Conduct user research, create wireframes, prototypes, and collaborate with developers.', tools: 'Figma, Adobe XD, Sketch, InVision, Zeplin', edu: 'B.Des or B.Tech in CS with design portfolio' },
+  { icon: '🔒', name: 'Cybersecurity Engineer', domain: 'Tech', desc: 'Protect systems and data from digital threats and vulnerabilities.', salary: '₹6L – ₹25L', demand: 92, growth: 'Very High', skills: ['Ethical Hacking', 'Firewalls', 'SIEM', 'Penetration Testing', 'Python', 'Linux'], jd: 'Identify vulnerabilities in systems and implement security measures. Monitor threats and respond to incidents to protect organizational data.', tools: 'Kali Linux, Wireshark, Metasploit, Burp Suite', edu: 'B.Tech in CS with cybersecurity certifications (CEH, CISSP)' },
+  { icon: '📱', name: 'Mobile App Developer', domain: 'Tech', desc: 'Build iOS and Android apps for millions of users.', salary: '₹5L – ₹20L', demand: 82, growth: 'High', skills: ['Flutter', 'React Native', 'Swift', 'Kotlin', 'Firebase', 'REST APIs'], jd: 'Develop mobile applications for Android and iOS platforms. Ensure performance, responsiveness, and great user experience across devices.', tools: 'Android Studio, Xcode, Flutter, Firebase, VS Code', edu: 'B.Tech in CS or self-taught with strong portfolio' },
+  { icon: '🗃️', name: 'Database Administrator', domain: 'Data', desc: 'Manage and optimize databases for performance and security.', salary: '₹4L – ₹16L', demand: 72, growth: 'Medium', skills: ['SQL', 'MySQL', 'PostgreSQL', 'MongoDB', 'Oracle', 'Backup & Recovery'], jd: 'Install, configure, and maintain database systems. Ensure data integrity, performance tuning, and disaster recovery planning.', tools: 'MySQL Workbench, pgAdmin, Oracle SQL Developer, MongoDB Compass', edu: 'B.Tech in CS or IT with database certifications' },
+  { icon: '📋', name: 'Product Manager', domain: 'Management', desc: 'Drive product strategy and lead cross-functional teams.', salary: '₹8L – ₹35L', demand: 83, growth: 'High', skills: ['Product Strategy', 'Agile', 'JIRA', 'Analytics', 'Stakeholder Mgmt', 'Roadmapping'], jd: 'Define product vision, gather requirements, and work with engineering, design, and marketing to build successful products.', tools: 'JIRA, Confluence, Figma, Google Analytics, Mixpanel', edu: 'MBA or B.Tech with product management experience' },
+  { icon: '🌐', name: 'Full Stack Developer', domain: 'Tech', desc: 'Build both frontend and backend of web applications.', salary: '₹5L – ₹22L', demand: 87, growth: 'High', skills: ['React', 'Node.js', 'MongoDB', 'Express', 'Python', 'PostgreSQL'], jd: 'Develop complete web applications from database to user interface. Handle server-side and client-side logic and deployment.', tools: 'VS Code, Git, Postman, Docker, AWS/Heroku', edu: 'B.Tech in CS or self-taught with portfolio' },
+  { icon: '📈', name: 'Business Analyst', domain: 'Management', desc: 'Bridge gap between technology and business needs.', salary: '₹4L – ₹16L', demand: 75, growth: 'Medium', skills: ['Requirements Analysis', 'SQL', 'Excel', 'Tableau', 'Process Modeling', 'Communication'], jd: 'Analyze business processes and requirements, translate them into technical specifications, and help implement solutions.', tools: 'Excel, Tableau, JIRA, Lucidchart, SQL', edu: 'BBA, B.Tech, or MBA with analytical skills' },
+  { icon: '🤝', name: 'DevOps Engineer', domain: 'Cloud', desc: 'Automate deployments and manage CI/CD pipelines.', salary: '₹6L – ₹28L', demand: 89, growth: 'Very High', skills: ['Docker', 'Kubernetes', 'Jenkins', 'Ansible', 'Linux', 'AWS'], jd: 'Build and maintain CI/CD pipelines, automate infrastructure provisioning, and ensure smooth deployments and system reliability.', tools: 'Jenkins, GitLab CI, Docker, Kubernetes, Terraform, Prometheus', edu: 'B.Tech in CS with DevOps certifications' },
+];
+
+let currentFilter = 'All';
+let currentSearch = '';
+
+function renderCareers() {
+  const grid = document.getElementById('careersGrid');
+  const filtered = careers.filter(c => {
+    const matchDomain = currentFilter === 'All' || c.domain === currentFilter;
+    const matchSearch = c.name.toLowerCase().includes(currentSearch.toLowerCase()) || c.domain.toLowerCase().includes(currentSearch.toLowerCase());
+    return matchDomain && matchSearch;
+  });
+  grid.innerHTML = filtered.map((c, i) => `
+    <div class="career-detail-card fade-up" onclick="openModal(${careers.indexOf(c)})" style="animation-delay:${i * 0.05}s">
+      <div class="cdc-header">
+        <div class="cdc-icon">${c.icon}</div>
+        <div class="cdc-info">
+          <h3>${c.name}</h3>
+          <span class="cdc-domain">${c.domain}</span>
+        </div>
+      </div>
+      <div class="cdc-desc">${c.desc}</div>
+      <div class="cdc-meta">
+        <div class="meta-row"><span class="meta-label">💰 Salary Range</span><span class="meta-val">${c.salary}</span></div>
+        <div class="meta-row"><span class="meta-label">📈 Job Growth</span><span class="meta-val ${c.growth.includes('Very') ? 'green' : 'yellow'}">${c.growth}</span></div>
+        <div class="meta-row"><span class="meta-label">🔥 Demand Score</span><span class="meta-val">${c.demand}%</span></div>
+      </div>
+      <div class="demand-bar"><div class="demand-fill" style="width:${c.demand}%; background: linear-gradient(90deg, var(--accent), var(--accent2))"></div></div>
+      <div class="skills-tags">${c.skills.slice(0,4).map(s => `<span class="skill-tag">${s}</span>`).join('')}${c.skills.length > 4 ? `<span class="skill-tag">+${c.skills.length - 4}</span>` : ''}</div>
+    </div>`).join('');
+}
+
+function setFilter(filter, btn) {
+  currentFilter = filter;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderCareers();
+}
+
+function filterCareers(val) {
+  currentSearch = val;
+  renderCareers();
+}
+
+function openModal(i) {
+  const c = careers[i];
+  document.getElementById('modalContent').innerHTML = `
+    <div class="modal-header">
+      <div class="modal-title">${c.icon} ${c.name}</div>
+      <button class="modal-close" onclick="document.getElementById('modalOverlay').classList.add('hidden')">✕</button>
+    </div>
+    <div class="info-section">
+      <h4>Job Description</h4>
+      <p style="color:var(--text2);font-size:0.9rem">${c.jd}</p>
+    </div>
+    <div class="info-section">
+      <h4>Required Skills</h4>
+      <div class="skills-tags">${c.skills.map(s => `<span class="skill-tag">${s}</span>`).join('')}</div>
+    </div>
+    <div class="info-section">
+      <h4>Tools & Technologies</h4>
+      <p style="color:var(--text2);font-size:0.9rem">${c.tools}</p>
+    </div>
+    <div class="info-section">
+      <div class="cdc-meta">
+        <div class="meta-row"><span class="meta-label">💰 Salary Range</span><span class="meta-val">${c.salary}</span></div>
+        <div class="meta-row"><span class="meta-label">📈 Growth</span><span class="meta-val green">${c.growth}</span></div>
+        <div class="meta-row"><span class="meta-label">🔥 Demand</span><span class="meta-val">${c.demand}%</span></div>
+      </div>
+    </div>
+    <div class="info-section">
+      <h4>Education</h4>
+      <p style="color:var(--text2);font-size:0.9rem">${c.edu}</p>
+    </div>
+    <div style="display:flex;gap:0.75rem;flex-wrap:wrap">
+      <a href="roadmap.html" class="btn btn-accent">View Roadmap</a>
+      <a href="skill-gap.html" class="btn btn-ghost">Check Skill Gap</a>
+    </div>`;
+  document.getElementById('modalOverlay').classList.remove('hidden');
+}
+
+function closeModal(e) {
+  if (e.target === document.getElementById('modalOverlay')) {
+    document.getElementById('modalOverlay').classList.add('hidden');
+  }
+}
+
+renderCareers();
+</script>
+</body>
+</html>

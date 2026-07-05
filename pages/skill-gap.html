@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skill Gap Analyzer – Future PathX</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/main.css">
+<style>
+.analyzer-layout { max-width: 900px; margin: 0 auto; padding: 2rem; }
+.input-section { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem; }
+@media(max-width:700px){ .input-section { grid-template-columns: 1fr; } }
+.skill-chip-grid { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.6rem; }
+.skill-chip {
+  padding: 0.3rem 0.75rem;
+  border-radius: 100px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text2);
+  transition: 0.2s;
+}
+.skill-chip:hover { border-color: var(--accent); color: var(--accent); }
+.skill-chip.selected { background: rgba(56,189,248,0.12); border-color: rgba(56,189,248,0.4); color: var(--accent); }
+.results-section { animation: fadeUp 0.4s ease; }
+.gap-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
+@media(max-width:600px){ .gap-grid { grid-template-columns: 1fr; } }
+.gap-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; }
+.gap-card-title { font-weight: 700; font-size: 0.9rem; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.4rem; }
+.skill-item { display: flex; align-items: center; gap: 0.6rem; padding: 0.5rem 0; border-bottom: 1px solid var(--border); }
+.skill-item:last-child { border: none; }
+.skill-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.skill-dot.have { background: var(--accent3); }
+.skill-dot.missing { background: var(--danger); }
+.skill-name { flex: 1; font-size: 0.88rem; }
+.skill-action { font-size: 0.75rem; color: var(--accent); font-weight: 500; }
+.learning-path { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; }
+.lp-title { font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; margin-bottom: 1rem; }
+.lp-item { display: flex; align-items: flex-start; gap: 1rem; padding: 1rem; background: var(--surface2); border-radius: var(--radius-sm); margin-bottom: 0.75rem; border: 1px solid var(--border); }
+.lp-icon { font-size: 1.6rem; flex-shrink: 0; }
+.lp-info h4 { font-weight: 700; font-size: 0.92rem; margin-bottom: 0.2rem; }
+.lp-info p { color: var(--text2); font-size: 0.82rem; }
+.lp-badges { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 0.4rem; }
+.lp-badge { font-size: 0.72rem; padding: 0.15rem 0.55rem; border-radius: 100px; background: rgba(56,189,248,0.1); color: var(--accent); border: 1px solid rgba(56,189,248,0.2); }
+.overall-score { text-align: center; padding: 1.5rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 1.5rem; }
+.os-value { font-family: var(--font-display); font-size: 3.5rem; font-weight: 800; line-height: 1; }
+.os-label { color: var(--text2); font-size: 0.88rem; margin-top: 0.25rem; }
+.analyze-btn {
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s;
+  letter-spacing: 0.5px;
+}
+.analyze-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-brand">Future<span>PathX</span></div>
+  <div class="nav-links">
+    <a href="../index.html">Dashboard</a>
+    <a href="career-test.html">Career Test</a>
+    <a href="career-explorer.html">Explore Careers</a>
+    <a href="resume-builder.html">Resume Builder</a>
+    <a href="roadmap.html">Roadmap</a>
+    <a href="skill-gap.html" class="active">Skill Gap</a>
+    <a href="resources.html">Resources</a>
+  </div>
+  <div class="nav-user"><div class="avatar">B</div><span>Bharath</span></div>
+</nav>
+
+<div class="page-hero">
+  <div class="container">
+    <h1>📈 Skill Gap Analyzer</h1>
+    <p>Compare your current skills against your target career and discover exactly what you need to learn.</p>
+  </div>
+</div>
+
+<div class="analyzer-layout">
+  <div class="input-section">
+    <div class="card">
+      <div class="card-title">🎯 Target Career</div>
+      <div class="form-group">
+        <label class="form-label">Select your target career</label>
+        <select class="form-select" id="targetCareer" onchange="updateRequiredSkills()">
+          <option value="ai">AI / ML Engineer</option>
+          <option value="data">Data Scientist</option>
+          <option value="web">Full Stack Developer</option>
+          <option value="cloud">Cloud / DevOps Engineer</option>
+          <option value="design">UI/UX Designer</option>
+          <option value="cyber">Cybersecurity Engineer</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Required Skills for this Role:</label>
+        <div class="skill-chip-grid" id="requiredSkillsDisplay"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">✅ Your Current Skills</div>
+      <div class="form-group">
+        <label class="form-label">Select skills you already have:</label>
+        <div class="skill-chip-grid" id="userSkillChips"></div>
+      </div>
+      <div class="form-group mt-2">
+        <label class="form-label">Add custom skill</label>
+        <div class="tag-input-wrap">
+          <input class="form-input" id="customSkill" placeholder="Type a skill..." onkeydown="if(event.key==='Enter') addCustomSkill()">
+          <button class="btn btn-accent" onclick="addCustomSkill()" style="border-radius:8px;padding:0.65rem 1rem">+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="analyze-btn" onclick="analyze()">⚡ Analyze My Skill Gap</button>
+
+  <div id="results" style="margin-top:2rem"></div>
+</div>
+
+<div class="chat-widget">
+  <div class="chat-bubble" onclick="toggleChat()">💬</div>
+  <div class="chat-panel" id="chatPanel">
+    <div class="chat-header"><span>🤖 AI Career Assistant</span><button onclick="toggleChat()">✕</button></div>
+    <div class="chat-messages" id="chatMessages"><div class="msg bot">Select your target career and current skills to see your gap analysis!</div></div>
+    <div class="chat-input"><input type="text" id="chatInput" placeholder="Ask me anything..." onkeydown="if(event.key==='Enter') sendChat()"><button onclick="sendChat()">→</button></div>
+  </div>
+</div>
+
+<script src="../js/main.js"></script>
+<script>
+const careerSkills = {
+  ai: {
+    name: 'AI / ML Engineer',
+    skills: ['Python', 'Machine Learning', 'Deep Learning', 'TensorFlow', 'PyTorch', 'NLP', 'Statistics', 'SQL', 'Git', 'Linux'],
+    resources: [
+      { skill: 'Deep Learning', icon: '🧠', course: 'Deep Learning Specialization – Coursera', duration: '3 months', platform: 'Coursera' },
+      { skill: 'NLP', icon: '💬', course: 'HuggingFace NLP Course – Free', duration: '4 weeks', platform: 'HuggingFace' },
+      { skill: 'PyTorch', icon: '🔥', course: 'PyTorch Official Tutorials', duration: '2 weeks', platform: 'pytorch.org' },
+    ]
+  },
+  data: {
+    name: 'Data Scientist',
+    skills: ['Python', 'R', 'SQL', 'Statistics', 'Machine Learning', 'Tableau', 'Excel', 'Pandas', 'NumPy', 'Matplotlib'],
+    resources: [
+      { skill: 'Statistics', icon: '📐', course: 'Statistics with Python – Coursera', duration: '6 weeks', platform: 'Coursera' },
+      { skill: 'Tableau', icon: '📊', course: 'Tableau Desktop Specialist – Udemy', duration: '3 weeks', platform: 'Udemy' },
+      { skill: 'R', icon: '📈', course: 'R for Data Science – Free Book', duration: '4 weeks', platform: 'r4ds.had.co.nz' },
+    ]
+  },
+  web: {
+    name: 'Full Stack Developer',
+    skills: ['JavaScript', 'React', 'Node.js', 'HTML/CSS', 'SQL', 'MongoDB', 'Git', 'REST APIs', 'Docker', 'TypeScript'],
+    resources: [
+      { skill: 'React', icon: '⚛️', course: 'The Ultimate React Course – Udemy', duration: '6 weeks', platform: 'Udemy' },
+      { skill: 'Docker', icon: '🐳', course: 'Docker Mastery – Bret Fisher', duration: '3 weeks', platform: 'Udemy' },
+      { skill: 'TypeScript', icon: '🟦', course: 'TypeScript Docs + Exercises', duration: '2 weeks', platform: 'typescriptlang.org' },
+    ]
+  },
+  cloud: {
+    name: 'Cloud / DevOps Engineer',
+    skills: ['AWS', 'Docker', 'Kubernetes', 'Linux', 'Terraform', 'Ansible', 'CI/CD', 'Python', 'Bash', 'Monitoring'],
+    resources: [
+      { skill: 'AWS', icon: '☁️', course: 'AWS Solutions Architect – A Cloud Guru', duration: '2 months', platform: 'acloud.guru' },
+      { skill: 'Kubernetes', icon: '⚙️', course: 'Kubernetes for Beginners – KodeKloud', duration: '4 weeks', platform: 'KodeKloud' },
+      { skill: 'Terraform', icon: '🔧', course: 'Terraform Associate Certification', duration: '3 weeks', platform: 'HashiCorp' },
+    ]
+  },
+  design: {
+    name: 'UI/UX Designer',
+    skills: ['Figma', 'Adobe XD', 'Wireframing', 'Prototyping', 'User Research', 'Design Systems', 'CSS', 'Accessibility', 'Typography', 'Color Theory'],
+    resources: [
+      { skill: 'Figma', icon: '🎨', course: 'Figma UI Design Tutorial – DesignCourse', duration: '3 weeks', platform: 'YouTube' },
+      { skill: 'User Research', icon: '🔍', course: 'UX Research & Strategy – Interaction Design', duration: '4 weeks', platform: 'IDF' },
+      { skill: 'Design Systems', icon: '📐', course: 'Design Systems with Figma', duration: '2 weeks', platform: 'Figma Community' },
+    ]
+  },
+  cyber: {
+    name: 'Cybersecurity Engineer',
+    skills: ['Linux', 'Networking', 'Python', 'Ethical Hacking', 'Wireshark', 'SIEM', 'Penetration Testing', 'Cryptography', 'Firewalls', 'Incident Response'],
+    resources: [
+      { skill: 'Ethical Hacking', icon: '🔒', course: 'CEH Certification – EC-Council', duration: '2 months', platform: 'EC-Council' },
+      { skill: 'SIEM', icon: '🛡️', course: 'Splunk Fundamentals – Free', duration: '2 weeks', platform: 'Splunk' },
+      { skill: 'Penetration Testing', icon: '💻', course: 'PortSwigger Web Security Academy', duration: '4 weeks', platform: 'Free' },
+    ]
+  }
+};
+
+let userSkills = new Set();
+let allSkills = [];
+
+function updateRequiredSkills() {
+  const career = document.getElementById('targetCareer').value;
+  const skills = careerSkills[career].skills;
+  allSkills = skills;
+  const container = document.getElementById('requiredSkillsDisplay');
+  container.innerHTML = skills.map(s => `<span class="skill-chip">${s}</span>`).join('');
+  renderUserChips();
+}
+
+function renderUserChips() {
+  const career = document.getElementById('targetCareer').value;
+  const skills = careerSkills[career].skills;
+  const container = document.getElementById('userSkillChips');
+  container.innerHTML = skills.map(s => `
+    <span class="skill-chip ${userSkills.has(s) ? 'selected' : ''}" onclick="toggleUserSkill('${s}', this)">${s}</span>
+  `).join('');
+}
+
+function toggleUserSkill(skill, el) {
+  if (userSkills.has(skill)) { userSkills.delete(skill); el.classList.remove('selected'); }
+  else { userSkills.add(skill); el.classList.add('selected'); }
+}
+
+function addCustomSkill() {
+  const input = document.getElementById('customSkill');
+  const val = input.value.trim();
+  if (val) { userSkills.add(val); input.value = ''; }
+}
+
+function analyze() {
+  const career = document.getElementById('targetCareer').value;
+  const data = careerSkills[career];
+  const required = data.skills;
+  const have = required.filter(s => userSkills.has(s));
+  const missing = required.filter(s => !userSkills.has(s));
+  const score = Math.round((have.length / required.length) * 100);
+
+  const scoreColor = score >= 70 ? 'var(--accent3)' : score >= 40 ? 'var(--warning)' : 'var(--danger)';
+  const scoreLabel = score >= 70 ? '🟢 Strong Match' : score >= 40 ? '🟡 Developing' : '🔴 Needs Work';
+
+  const relevantResources = data.resources.filter(r => missing.some(m => m.toLowerCase().includes(r.skill.toLowerCase()) || r.skill.toLowerCase().includes(m.toLowerCase())));
+
+  document.getElementById('results').innerHTML = `
+    <div class="results-section">
+      <div class="overall-score">
+        <div class="os-value" style="color:${scoreColor}">${score}%</div>
+        <div class="os-label">Skill Match for ${data.name}</div>
+        <div style="margin-top:0.5rem;font-size:0.9rem">${scoreLabel}</div>
+      </div>
+
+      <div class="gap-grid">
+        <div class="gap-card">
+          <div class="gap-card-title" style="color:var(--accent3)">✅ Skills You Have (${have.length})</div>
+          ${have.length === 0 ? '<p style="color:var(--text2);font-size:0.88rem">Select your skills above to see your matches.</p>' :
+            have.map(s => `<div class="skill-item"><div class="skill-dot have"></div><span class="skill-name">${s}</span><span style="font-size:0.75rem;color:var(--accent3)">✓</span></div>`).join('')}
+        </div>
+        <div class="gap-card">
+          <div class="gap-card-title" style="color:var(--danger)">❌ Skills to Learn (${missing.length})</div>
+          ${missing.length === 0 ? '<p style="color:var(--accent3);font-size:0.88rem">🎉 You have all required skills!</p>' :
+            missing.map(s => `<div class="skill-item"><div class="skill-dot missing"></div><span class="skill-name">${s}</span><span class="skill-action">Learn →</span></div>`).join('')}
+        </div>
+      </div>
+
+      ${missing.length > 0 ? `
+      <div class="learning-path">
+        <div class="lp-title">📚 Recommended Learning Path</div>
+        ${(relevantResources.length > 0 ? relevantResources : data.resources).map(r => `
+          <div class="lp-item">
+            <div class="lp-icon">${r.icon}</div>
+            <div class="lp-info">
+              <h4>${r.skill}</h4>
+              <p>${r.course}</p>
+              <div class="lp-badges">
+                <span class="lp-badge">⏱ ${r.duration}</span>
+                <span class="lp-badge">🌐 ${r.platform}</span>
+              </div>
+            </div>
+          </div>`).join('')}
+        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-top:1rem">
+          <a href="roadmap.html" class="btn btn-accent">View Full Roadmap</a>
+          <a href="resources.html" class="btn btn-ghost">Browse All Resources</a>
+        </div>
+      </div>` : `<div class="card" style="text-align:center"><div style="font-size:3rem">🎉</div><h3 style="font-family:var(--font-display);font-weight:800;margin:0.5rem 0">You're Ready!</h3><p style="color:var(--text2)">You have all the required skills. Start applying for ${data.name} roles!</p><div style="margin-top:1rem"><a href="resume-builder.html" class="btn btn-accent">Build Resume</a></div></div>`}
+    </div>`;
+}
+
+updateRequiredSkills();
+</script>
+</body>
+</html>

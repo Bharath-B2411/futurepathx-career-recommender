@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login & Register – Future PathX</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/main.css?v=1.1">
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<style>
+:root {
+  --login-bg: #050505;
+}
+
+body {
+  background: var(--login-bg);
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin: 0;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 450px;
+  padding: 3rem;
+  background: rgba(15, 15, 15, 0.8);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  animation: slideUp 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  z-index: 10;
+  transition: all 0.5s ease;
+}
+
+.hidden { display: none; }
+
+.login-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.login-brand {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+
+.login-brand span { color: var(--gold); }
+
+.login-subtitle {
+  color: var(--text3);
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.form-group { margin-bottom: 1.5rem; }
+
+.form-label {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 0.75rem;
+}
+
+.form-input {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--gold);
+  background: rgba(212, 175, 55, 0.05);
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
+}
+
+.system-btn {
+  width: 100%;
+  padding: 1.1rem;
+  margin-top: 1rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  font-size: 0.85rem;
+}
+
+.form-footer {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 0.85rem;
+  color: var(--text3);
+}
+
+.form-footer a {
+  color: var(--gold);
+  text-decoration: none;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Congrats Popup */
+.congrats-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.9);
+  backdrop-filter: blur(15px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.5s ease;
+}
+
+.congrats-overlay.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.congrats-modal {
+  text-align: center;
+  padding: 2rem;
+  max-width: 600px;
+  width: 100%;
+  transform: translateY(100vh) scale(0.8);
+  transition: all 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.congrats-overlay.show .congrats-modal { 
+  transform: translateY(0) scale(1); 
+}
+
+.congrats-icon { font-size: 4rem; margin-bottom: 2rem; animation: pulse 2s infinite; }
+.congrats-title { 
+  font-family: var(--font-display); 
+  font-size: 2.2rem; 
+  font-weight: 900; 
+  margin: 0 auto 2rem; 
+  text-transform: uppercase; 
+  color: var(--gold);
+  letter-spacing: 4px;
+  line-height: 1.1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.congrats-msg { color: var(--text2); line-height: 1.8; margin-bottom: 3rem; font-size: 1.1rem; }
+.congrats-msg strong { 
+  color: var(--gold); 
+  font-weight: 800; 
+  padding: 0 5px;
+  text-transform: capitalize;
+  display: inline-block;
+  animation: goldenBlink 1.5s infinite alternate ease-in-out;
+}
+
+@keyframes goldenBlink {
+  0% { color: var(--gold); text-shadow: 0 0 5px var(--gold-glow); transform: scale(1); }
+  100% { color: #fff7d1; text-shadow: 0 0 20px var(--gold), 0 0 30px var(--gold-dark); transform: scale(1.1); }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); filter: drop-shadow(0 0 10px var(--gold)); }
+  100% { transform: scale(1); }
+}
+
+/* Background Decoration */
+.bg-decor { position: absolute; width: 100%; height: 100%; top: 0; left: 0; pointer-events: none; }
+.orb { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.1; }
+.orb1 { width: 500px; height: 500px; background: var(--gold); top: -200px; left: -200px; }
+.orb2 { width: 400px; height: 400px; background: var(--accent); bottom: -100px; right: -100px; }
+
+#msgBox { text-align: center; margin-bottom: 1.5rem; font-size: 0.85rem; font-weight: 600; min-height: 1.2rem; }
+.error { color: #ff4d4d; }
+.success { color: var(--gold); }
+
+/* Starfield Animation */
+#starfield {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.5;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  from { transform: translateY(-10vh); }
+  to { transform: translateY(110vh); }
+}
+</style>
+</head>
+<body>
+
+<div id="starfield"></div>
+
+<div class="bg-decor">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+</div>
+
+<!-- LOGIN CARD -->
+<div class="login-card" id="loginCard">
+  <div class="login-header">
+    <div class="login-brand">Future<span>PathX</span></div>
+    <div class="login-subtitle">SECURE CAREER INTELLIGENCE</div>
+  </div>
+
+  <div id="msgBox"></div>
+
+  <form id="loginForm" onsubmit="handleLogin(event)">
+    <div class="form-group">
+      <label class="form-label">System Entity Address</label>
+      <input type="email" id="loginEmail" class="form-input" placeholder="user@example.com" required>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Access Key</label>
+      <input type="password" id="loginPass" class="form-input" placeholder="••••••••" required>
+    </div>
+    
+    <button type="submit" class="btn btn-accent system-btn">INITIALIZE ACCESS →</button>
+  </form>
+
+  <div class="form-footer">
+    No registered credentials? <a onclick="toggleMode('reg')">Generate New Access</a>
+  </div>
+</div>
+
+<!-- REGISTER CARD -->
+<div class="login-card hidden" id="regCard">
+  <div class="login-header">
+    <div class="login-brand">Future<span>PathX</span></div>
+    <div class="login-subtitle">CREATE NEW IDENTITY</div>
+  </div>
+
+  <form id="regForm" onsubmit="handleRegister(event)">
+    <div class="form-group">
+      <label class="form-label">Full Identifier Name</label>
+      <input type="text" id="regName" class="form-input" placeholder="Enter your full name" required>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Email Handle</label>
+      <input type="email" id="regEmail" class="form-input" placeholder="yourname@domain.com" required>
+    </div>
+    <div class="form-group">
+      <label class="form-label">New Access Key</label>
+      <input type="password" id="regPass" class="form-input" placeholder="Create a strong password" required>
+    </div>
+    
+    <button type="submit" class="btn btn-accent system-btn">CREATE IDENTITY →</button>
+  </form>
+
+  <div class="form-footer">
+    Already have identity? <a onclick="toggleMode('login')">Return to Entry</a>
+  </div>
+</div>
+
+<!-- CONGRATS MODAL -->
+<div class="congrats-overlay" id="congratsOverlay">
+  <div class="congrats-modal">
+    <div class="congrats-icon">✨</div>
+    <div class="congrats-title">Congratulations!</div>
+    <div class="congrats-msg">Welcome to the future of career intelligence, <strong id="welcomeUser">Explorer</strong>. Your professional identity has been successfully initialized.</div>
+    <button onclick="enterSystem()" class="btn btn-accent system-btn" style="width:auto; padding: 1rem 3rem;">ENTER PORTAL</button>
+  </div>
+</div>
+
+<script>
+function toggleMode(mode) {
+  const login = document.getElementById('loginCard');
+  const reg = document.getElementById('regCard');
+  const msg = document.getElementById('msgBox');
+  msg.innerHTML = '';
+
+  if (mode === 'reg') {
+    login.classList.add('hidden');
+    reg.classList.remove('hidden');
+  } else {
+    login.classList.remove('hidden');
+    reg.classList.add('hidden');
+  }
+}
+
+function handleLogin(e) {
+  e.preventDefault();
+  const email = document.getElementById('loginEmail').value;
+  const pass = document.getElementById('loginPass').value;
+  const msg = document.getElementById('msgBox');
+
+  // Load registered users from local cache
+  const users = JSON.parse(localStorage.getItem('fpx_users') || '[]');
+  
+  // Check against static demo AND registered users
+  const demoUser = (email === 'user@example.com' && pass === 'password123');
+  const regUser = users.find(u => u.email === email && u.pass === pass);
+
+  if (demoUser || regUser) {
+    const activeName = regUser ? regUser.name : 'Professional User';
+    msg.className = 'ok';
+    msg.innerHTML = '✔ Entity Verified. Transitioning...';
+    localStorage.setItem('fpx_logged_in', 'true');
+    localStorage.setItem('fpx_user_name', activeName);
+    localStorage.setItem('fpx_user_id', regUser ? regUser.id : 'FPX-2024-USR-01');
+    setTimeout(() => { window.location.href = '../index.html'; }, 1000);
+  } else {
+    msg.className = 'err';
+    msg.innerHTML = '✘ Access Invalid. Check credentials.';
+  }
+}
+
+function handleRegister(e) {
+  e.preventDefault();
+  const name = document.getElementById('regName').value;
+  const email = document.getElementById('regEmail').value;
+  const pass = document.getElementById('regPass').value;
+
+  // Save to persistent entity cache
+  const users = JSON.parse(localStorage.getItem('fpx_users') || '[]');
+  const newUser = {
+    name: name,
+    email: email,
+    pass: pass,
+    id: 'FPX-2024-NEW-' + Math.floor(Math.random()*1000)
+  };
+  users.push(newUser);
+  localStorage.setItem('fpx_users', JSON.stringify(users));
+
+  // Initialize current session
+  localStorage.setItem('fpx_logged_in', 'true');
+  localStorage.setItem('fpx_user_name', name);
+  localStorage.setItem('fpx_user_id', newUser.id);
+  
+  // Show Congrats
+  document.getElementById('welcomeUser').textContent = name;
+  document.getElementById('congratsOverlay').classList.add('show');
+
+  // Trigger celebration
+  const end = Date.now() + (3 * 1000);
+  const colors = ['#d4af37', '#ffffff', '#aa8a2a'];
+
+  (function frame() {
+    confetti({
+      particleCount: 3,
+      angle: 60,
+      spread: 55,
+      origin: { x: 0 },
+      colors: colors
+    });
+    confetti({
+      particleCount: 3,
+      angle: 120,
+      spread: 55,
+      origin: { x: 1 },
+      colors: colors
+    });
+
+    if (Date.now() < end) {
+      requestAnimationFrame(frame);
+    }
+  }());
+}
+
+function enterSystem() {
+  window.location.href = '../index.html';
+}
+
+// Starfield Generator
+function createStars() {
+  const field = document.getElementById('starfield');
+  const count = 150;
+  for (let i = 0; i < count; i++) {
+    const star = document.createElement('div');
+    star.className = 'star';
+    const size = Math.random() * 2 + 1 + 'px';
+    star.style.width = size;
+    star.style.height = size;
+    star.style.left = Math.random() * 100 + 'vw';
+    star.style.animationDuration = Math.random() * 5 + 5 + 's';
+    star.style.animationDelay = Math.random() * 5 + 's';
+    star.style.opacity = Math.random();
+    field.appendChild(star);
+  }
+}
+createStars();
+
+// Global Auth Guard logic from local storage
+if (localStorage.getItem('fpx_logged_in') === 'true') {
+  // Option to auto-redirect or allow stay on login
+}
+</script>
+</body>
+</html>

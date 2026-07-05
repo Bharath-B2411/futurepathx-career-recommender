@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard – Future PathX</title>
+  <meta name="description"
+    content="Your personalized AI-powered career dashboard. Track progress, explore careers, and build your future path.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css?v=1.1">
+  <link rel="stylesheet" href="css/dashboard.css?v=1.1">
+</head>
+
+<body>
+
+  <!-- ═══════════════════════════════ NAV ═══════════════════════════════ -->
+  <nav class="nav">
+    <div class="nav-brand">Future<span>PathX</span></div>
+    <div class="nav-links">
+      <a href="index.html" class="active">Dashboard</a>
+      <a href="pages/career-test.html">Career Test</a>
+      <a href="pages/career-explorer.html">Explore Careers</a>
+      <a href="pages/resume-builder.html">Resume Builder</a>
+      <a href="pages/roadmap.html">Roadmap</a>
+      <a href="pages/skill-gap.html">Skill Gap</a>
+      <a href="pages/resources.html">Resources</a>
+    </div>
+    <div class="nav-user">
+      <div class="avatar" id="userAvatar">I</div>
+      <span id="userName" class="u-name">Innovator</span>
+      <button class="logout-btn-header" onclick="handleLogout()" title="Sign Out">✕</button>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════ WELCOME SECTION ═══════════════════ -->
+  <section class="db-welcome">
+    <div class="db-welcome-bg">
+      <div class="orb orb1"></div>
+      <div class="orb orb2"></div>
+      <div class="orb orb3"></div>
+      <div class="grid-overlay"></div>
+    </div>
+    <div class="container db-welcome-content">
+      <div class="welcome-left">
+        <div class="welcome-badge">
+          <span class="badge-dot"></span>
+          <span>AI-Powered Career Platform</span>
+        </div>
+        <h1 class="welcome-heading" style="font-size: 3.5rem; letter-spacing: -2px; margin-bottom: 0.5rem;">
+          Welcome back, <span class="u-name" style="color: var(--gold); animation: goldenBlink 2s infinite alternate;">User</span> 👋
+        </h1>
+        <p class="welcome-sub" style="font-size: 1.1rem; opacity: 0.9; margin-bottom: 2rem;">
+          Your professional identity <strong class="u-id">FPX-SESSION-ACTIVE</strong> is synced and ready.
+        </p>
+        <div class="career-interests-row">
+          <span class="interest-label">Your Interests:</span>
+          <span class="interest-tag">🤖 Artificial Intelligence</span>
+          <span class="interest-tag">📊 Data Science</span>
+          <span class="interest-tag">💡 Machine Learning</span>
+        </div>
+        <div class="welcome-actions">
+          <a href="pages/career-explorer.html" class="btn-primary">Explore Careers</a>
+          <a href="pages/roadmap.html" class="btn-outline">View Roadmap →</a>
+        </div>
+      </div>
+      <div class="welcome-right">
+        <div class="welcome-stats-card">
+          <div class="ws-header">
+            <span class="ws-icon">⚡</span>
+            <span class="ws-title">Daily Progress</span>
+            <span class="ws-streak"><span id="streakCount">7</span> day streak 🔥</span>
+          </div>
+          <div class="ws-ring-wrap">
+            <svg class="ws-ring" viewBox="0 0 120 120">
+              <circle cx="60" cy="60" r="50" class="ring-track" />
+              <circle cx="60" cy="60" r="50" class="ring-fill" id="progressRing" />
+            </svg>
+            <div class="ws-ring-center">
+              <div class="ws-pct" id="overallPct">68%</div>
+              <div class="ws-pct-label">Overall</div>
+            </div>
+          </div>
+          <div class="ws-mini-stats">
+            <div class="ws-ms">
+              <div class="ws-ms-value">3</div>
+              <div class="ws-ms-label">Careers</div>
+            </div>
+            <div class="ws-ms">
+              <div class="ws-ms-value">4</div>
+              <div class="ws-ms-label">Skills Gap</div>
+            </div>
+            <div class="ws-ms">
+              <div class="ws-ms-value">78%</div>
+              <div class="ws-ms-label">Resume</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ CAREER RECOMMENDATION ═══════════════ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="sh-left">
+          <div class="sh-icon">🎯</div>
+          <div>
+            <h2 class="sh-title">Career Recommendations</h2>
+            <p class="sh-sub">AI-matched to your skills & interests</p>
+          </div>
+        </div>
+        <a href="pages/career-explorer.html" class="view-all">View All →</a>
+      </div>
+
+      <div class="career-grid">
+        <!-- Best match card -->
+        <div class="career-card featured">
+          <div class="career-badge-pill">✦ Best Match</div>
+          <div class="career-card-header">
+            <span class="career-emoji">🤖</span>
+            <div class="career-info">
+              <h3>AI Engineer</h3>
+              <p class="career-salary">💰 ₹12–25 LPA avg</p>
+            </div>
+          </div>
+          <p class="career-desc">Design and build intelligent systems using machine learning, neural networks, and large
+            language models.</p>
+          <div class="career-tags">
+            <span class="ctag">Python</span><span class="ctag">TensorFlow</span><span class="ctag">NLP</span>
+          </div>
+          <div class="match-score-row">
+            <div class="match-score-bar">
+              <div class="match-score-fill" style="width:0%" data-target="92"></div>
+            </div>
+            <span class="match-pct">92% Match</span>
+          </div>
+          <div class="career-card-actions">
+            <a href="pages/roadmap.html" class="btn btn-accent btn-sm">View Roadmap</a>
+            <a href="pages/career-explorer.html" class="btn btn-ghost btn-sm">Learn More</a>
+          </div>
+        </div>
+
+        <div class="career-card">
+          <div class="career-card-header">
+            <span class="career-emoji">📊</span>
+            <div class="career-info">
+              <h3>Data Scientist</h3>
+              <p class="career-salary">💰 ₹10–20 LPA avg</p>
+            </div>
+          </div>
+          <p class="career-desc">Extract insights from complex datasets and build predictive models for strategic
+            business decisions.</p>
+          <div class="career-tags">
+            <span class="ctag">Python</span><span class="ctag">SQL</span><span class="ctag">Statistics</span>
+          </div>
+          <div class="match-score-row">
+            <div class="match-score-bar">
+              <div class="match-score-fill" style="width:0%" data-target="88"></div>
+            </div>
+            <span class="match-pct">88% Match</span>
+          </div>
+          <div class="career-card-actions">
+            <a href="pages/roadmap.html" class="btn btn-accent btn-sm">View Roadmap</a>
+            <a href="pages/career-explorer.html" class="btn btn-ghost btn-sm">Learn More</a>
+          </div>
+        </div>
+
+        <div class="career-card">
+          <div class="career-card-header">
+            <span class="career-emoji">💻</span>
+            <div class="career-info">
+              <h3>Full-Stack Developer</h3>
+              <p class="career-salary">💰 ₹8–18 LPA avg</p>
+            </div>
+          </div>
+          <p class="career-desc">Build end-to-end scalable web applications using modern frontend and backend
+            technologies.</p>
+          <div class="career-tags">
+            <span class="ctag">React</span><span class="ctag">Node.js</span><span class="ctag">Databases</span>
+          </div>
+          <div class="match-score-row">
+            <div class="match-score-bar">
+              <div class="match-score-fill" style="width:0%" data-target="80"></div>
+            </div>
+            <span class="match-pct">80% Match</span>
+          </div>
+          <div class="career-card-actions">
+            <a href="pages/roadmap.html" class="btn btn-accent btn-sm">View Roadmap</a>
+            <a href="pages/career-explorer.html" class="btn btn-ghost btn-sm">Learn More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ RESUME PROGRESS ════════════════════ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="sh-left">
+          <div class="sh-icon">📄</div>
+          <div>
+            <h2 class="sh-title">Resume Completion</h2>
+            <p class="sh-sub">Build a job-ready resume</p>
+          </div>
+        </div>
+        <a href="pages/resume-builder.html" class="view-all">Open Resume Builder →</a>
+      </div>
+
+      <div class="resume-dashboard-card glass-card">
+        <div class="resume-left">
+          <div class="resume-score-wrap">
+            <div class="resume-score-circle">
+              <svg viewBox="0 0 100 100" class="score-svg">
+                <circle cx="50" cy="50" r="42" class="score-track" />
+                <circle cx="50" cy="50" r="42" class="score-arc" id="resumeArc" />
+              </svg>
+              <div class="score-center">
+                <span class="score-num">78</span>
+                <span class="score-tag">/ 100</span>
+              </div>
+            </div>
+            <p class="resume-score-label">Resume Score</p>
+            <p class="resume-score-hint">Almost there! Add 2 more sections to reach 90+</p>
+          </div>
+        </div>
+        <div class="resume-right">
+          <div class="resume-sections">
+            <div class="resume-section-row done">
+              <div class="rsec-icon">✔</div>
+              <div class="rsec-info">
+                <span class="rsec-name">Personal Information</span>
+                <div class="rsec-bar">
+                  <div class="rsec-fill" style="width:100%"></div>
+                </div>
+              </div>
+              <span class="rsec-pct">100%</span>
+            </div>
+            <div class="resume-section-row done">
+              <div class="rsec-icon">✔</div>
+              <div class="rsec-info">
+                <span class="rsec-name">Education</span>
+                <div class="rsec-bar">
+                  <div class="rsec-fill" style="width:100%"></div>
+                </div>
+              </div>
+              <span class="rsec-pct">100%</span>
+            </div>
+            <div class="resume-section-row done">
+              <div class="rsec-icon">✔</div>
+              <div class="rsec-info">
+                <span class="rsec-name">Skills</span>
+                <div class="rsec-bar">
+                  <div class="rsec-fill" style="width:100%"></div>
+                </div>
+              </div>
+              <span class="rsec-pct">100%</span>
+            </div>
+            <div class="resume-section-row partial">
+              <div class="rsec-icon">◐</div>
+              <div class="rsec-info">
+                <span class="rsec-name">Work Experience</span>
+                <div class="rsec-bar">
+                  <div class="rsec-fill partial-fill" style="width:40%"></div>
+                </div>
+              </div>
+              <span class="rsec-pct partial-pct">40%</span>
+            </div>
+            <div class="resume-section-row empty">
+              <div class="rsec-icon">○</div>
+              <div class="rsec-info">
+                <span class="rsec-name">Projects</span>
+                <div class="rsec-bar">
+                  <div class="rsec-fill empty-fill" style="width:0%"></div>
+                </div>
+              </div>
+              <span class="rsec-pct empty-pct">0%</span>
+            </div>
+            <div class="resume-section-row empty">
+              <div class="rsec-icon">○</div>
+              <div class="rsec-info">
+                <span class="rsec-name">Certifications</span>
+                <div class="rsec-bar">
+                  <div class="rsec-fill empty-fill" style="width:0%"></div>
+                </div>
+              </div>
+              <span class="rsec-pct empty-pct">0%</span>
+            </div>
+          </div>
+          <a href="pages/resume-builder.html" class="btn btn-accent mt-2">Continue Building Resume ✏️</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ SKILL GAP ANALYSIS ════════════════ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="sh-left">
+          <div class="sh-icon">⚡</div>
+          <div>
+            <h2 class="sh-title">Skill Gap Analysis</h2>
+            <p class="sh-sub">Skills needed for AI Engineer role</p>
+          </div>
+        </div>
+        <a href="pages/skill-gap.html" class="view-all">Full Analysis →</a>
+      </div>
+
+      <div class="skillgap-layout">
+        <div class="skillgap-main glass-card">
+          <div class="skillgap-skills">
+            <div class="skill-row">
+              <span class="skill-name">Python</span>
+              <div class="skill-bar-wrap">
+                <div class="skill-bar-fill acquired" style="width:0%" data-target="85"></div>
+              </div>
+              <span class="skill-status acquired-label">85%</span>
+            </div>
+            <div class="skill-row">
+              <span class="skill-name">Machine Learning</span>
+              <div class="skill-bar-wrap">
+                <div class="skill-bar-fill acquired" style="width:0%" data-target="72"></div>
+              </div>
+              <span class="skill-status acquired-label">72%</span>
+            </div>
+            <div class="skill-row">
+              <span class="skill-name">Deep Learning</span>
+              <div class="skill-bar-wrap">
+                <div class="skill-bar-fill gap" style="width:0%" data-target="35"></div>
+              </div>
+              <span class="skill-status gap-label">35%</span>
+            </div>
+            <div class="skill-row">
+              <span class="skill-name">NLP / LLMs</span>
+              <div class="skill-bar-wrap">
+                <div class="skill-bar-fill gap" style="width:0%" data-target="20"></div>
+              </div>
+              <span class="skill-status gap-label">20%</span>
+            </div>
+            <div class="skill-row">
+              <span class="skill-name">MLOps / Deployment</span>
+              <div class="skill-bar-wrap">
+                <div class="skill-bar-fill critical" style="width:0%" data-target="10"></div>
+              </div>
+              <span class="skill-status critical-label">10%</span>
+            </div>
+            <div class="skill-row">
+              <span class="skill-name">SQL & Databases</span>
+              <div class="skill-bar-wrap">
+                <div class="skill-bar-fill acquired" style="width:0%" data-target="70"></div>
+              </div>
+              <span class="skill-status acquired-label">70%</span>
+            </div>
+          </div>
+          <div class="skill-legend">
+            <span class="leg-item"><span class="leg-dot acquired-dot"></span>Strong</span>
+            <span class="leg-item"><span class="leg-dot gap-dot"></span>Needs Work</span>
+            <span class="leg-item"><span class="leg-dot critical-dot"></span>Critical Gap</span>
+          </div>
+        </div>
+        <div class="skillgap-side">
+          <div class="skillgap-alert glass-card">
+            <div class="sg-alert-icon">🚨</div>
+            <h4>4 Critical Gaps Found</h4>
+            <p>You're missing key skills that employers look for in AI Engineer roles.</p>
+            <a href="pages/skill-gap.html" class="btn btn-accent btn-sm mt-2">Fix Skill Gaps</a>
+          </div>
+          <div class="skillgap-missing glass-card">
+            <h4 class="sg-miss-title">Missing Skills</h4>
+            <div class="missing-skills-list">
+              <div class="ms-item"><span class="ms-dot critical-dot"></span><span>MLOps & Docker</span></div>
+              <div class="ms-item"><span class="ms-dot critical-dot"></span><span>Transformer Models</span></div>
+              <div class="ms-item"><span class="ms-dot gap-dot"></span><span>CUDA / GPU Programming</span></div>
+              <div class="ms-item"><span class="ms-dot gap-dot"></span><span>Hugging Face APIs</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ LEARNING RESOURCES ════════════════ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="sh-left">
+          <div class="sh-icon">📚</div>
+          <div>
+            <h2 class="sh-title">Recommended Learning</h2>
+            <p class="sh-sub">Handpicked resources for your career path</p>
+          </div>
+        </div>
+        <a href="pages/resources.html" class="view-all">All Resources →</a>
+      </div>
+
+      <div class="resources-grid">
+        <div class="resource-card glass-card">
+          <div class="resource-top">
+            <span class="resource-platform-badge udemy">Udemy</span>
+            <span class="resource-type-badge">🎓 Course</span>
+          </div>
+          <div class="resource-thumb">🤖</div>
+          <h4>Machine Learning A–Z</h4>
+          <p>Hands-on Python & R in Data Science — from scratch to expert.</p>
+          <div class="resource-meta">
+            <span>⭐ 4.9</span>
+            <span>•</span>
+            <span>44h</span>
+            <span>•</span>
+            <span class="resource-free">₹499</span>
+          </div>
+          <a href="pages/resources.html" class="btn btn-ghost btn-sm mt-2">Start Learning →</a>
+        </div>
+
+        <div class="resource-card glass-card">
+          <div class="resource-top">
+            <span class="resource-platform-badge coursera">Coursera</span>
+            <span class="resource-type-badge">🎓 Specialization</span>
+          </div>
+          <div class="resource-thumb">🧠</div>
+          <h4>Deep Learning Specialization</h4>
+          <p>By Andrew Ng. Master neural networks, CNNs, RNNs & more.</p>
+          <div class="resource-meta">
+            <span>⭐ 4.9</span>
+            <span>•</span>
+            <span>5 Courses</span>
+            <span>•</span>
+            <span class="resource-free">Free Audit</span>
+          </div>
+          <a href="pages/resources.html" class="btn btn-ghost btn-sm mt-2">Start Learning →</a>
+        </div>
+
+        <div class="resource-card glass-card">
+          <div class="resource-top">
+            <span class="resource-platform-badge youtube">YouTube</span>
+            <span class="resource-type-badge">🎥 Playlist</span>
+          </div>
+          <div class="resource-thumb">⚙️</div>
+          <h4>MLOps Full Course</h4>
+          <p>Deploy ML models with Docker, FastAPI, and CI/CD pipelines.</p>
+          <div class="resource-meta">
+            <span>⭐ 4.7</span>
+            <span>•</span>
+            <span>12h</span>
+            <span>•</span>
+            <span class="resource-free">Free</span>
+          </div>
+          <a href="pages/resources.html" class="btn btn-ghost btn-sm mt-2">Start Learning →</a>
+        </div>
+
+        <div class="resource-card glass-card">
+          <div class="resource-top">
+            <span class="resource-platform-badge hf">HuggingFace</span>
+            <span class="resource-type-badge">📖 Docs</span>
+          </div>
+          <div class="resource-thumb">🦄</div>
+          <h4>NLP with Transformers</h4>
+          <p>Official course: BERT, GPT, fine-tuning and building real NLP apps.</p>
+          <div class="resource-meta">
+            <span>⭐ 4.8</span>
+            <span>•</span>
+            <span>Self-paced</span>
+            <span>•</span>
+            <span class="resource-free">Free</span>
+          </div>
+          <a href="pages/resources.html" class="btn btn-ghost btn-sm mt-2">Start Learning →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ CAREER TRENDS ═════════════════════ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="sh-left">
+          <div class="sh-icon">📈</div>
+          <div>
+            <h2 class="sh-title">Latest Career Trends</h2>
+            <p class="sh-sub">What's hot in the tech industry right now</p>
+          </div>
+        </div>
+        <span class="updated-badge">Updated March 2026</span>
+      </div>
+
+      <div class="trends-layout">
+        <div class="trends-list">
+          <div class="trend-item glass-card hot">
+            <div class="trend-rank">#1</div>
+            <div class="trend-body">
+              <div class="trend-top">
+                <h4>Generative AI Engineering</h4>
+                <span class="trend-badge hot-badge">🔥 Hottest</span>
+              </div>
+              <p>Demand for engineers who can build and fine-tune LLM-powered products skyrocketed in 2025-26.</p>
+              <div class="trend-tags">
+                <span class="ttag">+430% job growth</span>
+                <span class="ttag">₹20-40 LPA</span>
+              </div>
+            </div>
+            <div class="trend-chart">
+              <div class="trend-bar-vert" style="--h:90%"></div>
+            </div>
+          </div>
+
+          <div class="trend-item glass-card">
+            <div class="trend-rank">#2</div>
+            <div class="trend-body">
+              <div class="trend-top">
+                <h4>MLOps & AI Infrastructure</h4>
+                <span class="trend-badge rise-badge">📊 Rising</span>
+              </div>
+              <p>Companies need engineers who can deploy and monitor ML models reliably at scale.</p>
+              <div class="trend-tags">
+                <span class="ttag">+280% demand</span>
+                <span class="ttag">₹15-30 LPA</span>
+              </div>
+            </div>
+            <div class="trend-chart">
+              <div class="trend-bar-vert" style="--h:72%"></div>
+            </div>
+          </div>
+
+          <div class="trend-item glass-card">
+            <div class="trend-rank">#3</div>
+            <div class="trend-body">
+              <div class="trend-top">
+                <h4>AI + Product Management</h4>
+                <span class="trend-badge rise-badge">🚀 Emerging</span>
+              </div>
+              <p>Technical PMs who understand AI capabilities are the most sought-after hybrid role in 2026.</p>
+              <div class="trend-tags">
+                <span class="ttag">+190% demand</span>
+                <span class="ttag">₹18-35 LPA</span>
+              </div>
+            </div>
+            <div class="trend-chart">
+              <div class="trend-bar-vert" style="--h:58%"></div>
+            </div>
+          </div>
+
+          <div class="trend-item glass-card">
+            <div class="trend-rank">#4</div>
+            <div class="trend-body">
+              <div class="trend-top">
+                <h4>Cybersecurity + AI</h4>
+                <span class="trend-badge stable-badge">🔒 Stable</span>
+              </div>
+              <p>AI-powered threat detection specialists are critically needed across all industries.</p>
+              <div class="trend-tags">
+                <span class="ttag">+150% demand</span>
+                <span class="ttag">₹12-28 LPA</span>
+              </div>
+            </div>
+            <div class="trend-chart">
+              <div class="trend-bar-vert" style="--h:45%"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="trends-insights glass-card">
+          <h4 class="ti-title">💡 Market Insights</h4>
+          <div class="insight-stat">
+            <div class="is-value">84%</div>
+            <div class="is-label">of companies plan to hire AI talent in 2026</div>
+          </div>
+          <div class="insight-stat">
+            <div class="is-value">₹28L</div>
+            <div class="is-label">Average salary for senior AI engineers in India</div>
+          </div>
+          <div class="insight-stat">
+            <div class="is-value">3.5M</div>
+            <div class="is-label">New AI/ML jobs projected globally by 2027</div>
+          </div>
+          <div class="insight-note">
+            <span>🎯</span>
+            <p>Your current path to <strong>AI Engineer</strong> aligns perfectly with the #1 trend!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ UPCOMING GOALS ════════════════════ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="sh-left">
+          <div class="sh-icon">🗓️</div>
+          <div>
+            <h2 class="sh-title">Upcoming Goals & Tasks</h2>
+            <p class="sh-sub">Stay on track with your career plan</p>
+          </div>
+        </div>
+        <button class="btn btn-ghost btn-sm" onclick="openAddGoal()">+ Add Goal</button>
+      </div>
+
+      <div class="goals-layout">
+        <div class="goals-main glass-card">
+          <div class="goals-tabs">
+            <button class="goal-tab active" onclick="filterGoals('all', this)">All</button>
+            <button class="goal-tab" onclick="filterGoals('today', this)">Today</button>
+            <button class="goal-tab" onclick="filterGoals('week', this)">This Week</button>
+            <button class="goal-tab" onclick="filterGoals('month', this)">This Month</button>
+          </div>
+
+          <div class="goals-list" id="goalsList">
+            <div class="goal-item" data-period="today" data-done="false">
+              <button class="goal-check" onclick="toggleGoal(this)" aria-label="Mark done">
+                <span class="check-inner"></span>
+              </button>
+              <div class="goal-info">
+                <span class="goal-title">Complete Deep Learning Module 3</span>
+                <span class="goal-meta"><span class="goal-category cat-learn">📖 Learning</span><span
+                    class="goal-due due-today">Due Today</span></span>
+              </div>
+              <span class="goal-priority high-p">High</span>
+            </div>
+
+            <div class="goal-item" data-period="today" data-done="false">
+              <button class="goal-check" onclick="toggleGoal(this)" aria-label="Mark done">
+                <span class="check-inner"></span>
+              </button>
+              <div class="goal-info">
+                <span class="goal-title">Add 2 Projects to Resume</span>
+                <span class="goal-meta"><span class="goal-category cat-resume">📄 Resume</span><span
+                    class="goal-due due-today">Due Today</span></span>
+              </div>
+              <span class="goal-priority high-p">High</span>
+            </div>
+
+            <div class="goal-item" data-period="week" data-done="false">
+              <button class="goal-check" onclick="toggleGoal(this)" aria-label="Mark done">
+                <span class="check-inner"></span>
+              </button>
+              <div class="goal-info">
+                <span class="goal-title">Practice 5 LeetCode Problems (Arrays)</span>
+                <span class="goal-meta"><span class="goal-category cat-skill">⚡ Skill</span><span class="goal-due">Mar
+                    10</span></span>
+              </div>
+              <span class="goal-priority med-p">Medium</span>
+            </div>
+
+            <div class="goal-item" data-period="week" data-done="false">
+              <button class="goal-check" onclick="toggleGoal(this)" aria-label="Mark done">
+                <span class="check-inner"></span>
+              </button>
+              <div class="goal-info">
+                <span class="goal-title">Build and Deploy an ML Model (portfolio)</span>
+                <span class="goal-meta"><span class="goal-category cat-career">🎯 Career</span><span
+                    class="goal-due">Mar 12</span></span>
+              </div>
+              <span class="goal-priority high-p">High</span>
+            </div>
+
+            <div class="goal-item" data-period="week" data-done="true">
+              <button class="goal-check done" onclick="toggleGoal(this)" aria-label="Mark done">
+                <span class="check-inner">✓</span>
+              </button>
+              <div class="goal-info">
+                <span class="goal-title goal-done-text">Take Career Assessment Test</span>
+                <span class="goal-meta"><span class="goal-category cat-career">🎯 Career</span><span
+                    class="goal-due">Completed</span></span>
+              </div>
+              <span class="goal-priority low-p">Done</span>
+            </div>
+
+            <div class="goal-item" data-period="month" data-done="false">
+              <button class="goal-check" onclick="toggleGoal(this)" aria-label="Mark done">
+                <span class="check-inner"></span>
+              </button>
+              <div class="goal-info">
+                <span class="goal-title">Earn Coursera Deep Learning Certificate</span>
+                <span class="goal-meta"><span class="goal-category cat-learn">📖 Learning</span><span
+                    class="goal-due">Mar 31</span></span>
+              </div>
+              <span class="goal-priority med-p">Medium</span>
+            </div>
+
+            <div class="goal-item" data-period="month" data-done="false">
+              <button class="goal-check" onclick="toggleGoal(this)" aria-label="Mark done">
+                <span class="check-inner"></span>
+              </button>
+              <div class="goal-info">
+                <span class="goal-title">Apply to 5 Entry-Level AI Internships</span>
+                <span class="goal-meta"><span class="goal-category cat-career">🎯 Career</span><span
+                    class="goal-due">Mar 28</span></span>
+              </div>
+              <span class="goal-priority high-p">High</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Goals summary -->
+        <div class="goals-summary">
+          <div class="goal-summary-card glass-card">
+            <div class="gsum-icon">✅</div>
+            <div class="gsum-value" id="doneCount">1</div>
+            <div class="gsum-label">Completed</div>
+          </div>
+          <div class="goal-summary-card glass-card">
+            <div class="gsum-icon">⏳</div>
+            <div class="gsum-value" id="pendCount">6</div>
+            <div class="gsum-label">Pending</div>
+          </div>
+          <div class="goal-summary-card glass-card">
+            <div class="gsum-icon">🔥</div>
+            <div class="gsum-value">7</div>
+            <div class="gsum-label">Day Streak</div>
+          </div>
+          <div class="goal-progress-card glass-card">
+            <h4>Monthly Progress</h4>
+            <div class="goal-month-bar">
+              <div class="goal-month-fill" id="monthFill" style="width:14%"></div>
+            </div>
+            <p>1 of 7 goals this month</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ ADD GOAL MODAL ════════════════════ -->
+  <div class="modal-overlay" id="goalModal" onclick="closeModal(event)">
+    <div class="modal-box glass-card">
+      <div class="modal-header">
+        <h3>Add New Goal</h3>
+        <button onclick="closeAddGoal()">✕</button>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Goal Title</label>
+        <input type="text" class="form-input" id="newGoalTitle" placeholder="e.g. Complete Python course module">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Category</label>
+        <select class="form-select" id="newGoalCategory">
+          <option value="cat-learn">📖 Learning</option>
+          <option value="cat-resume">📄 Resume</option>
+          <option value="cat-skill">⚡ Skill</option>
+          <option value="cat-career">🎯 Career</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Due Date</label>
+        <input type="date" class="form-input" id="newGoalDate">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Priority</label>
+        <select class="form-select" id="newGoalPriority">
+          <option value="high-p">High</option>
+          <option value="med-p">Medium</option>
+          <option value="low-p">Low</option>
+        </select>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-ghost" onclick="closeAddGoal()">Cancel</button>
+        <button class="btn btn-accent" onclick="addGoal()">Add Goal</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ AI CHAT WIDGET ════════════════════ -->
+  <div class="chat-widget" id="chatWidget">
+    <div class="chat-bubble" onclick="toggleChat()" title="AI Career Assistant">💬</div>
+    <div class="chat-panel" id="chatPanel">
+      <div class="chat-header">
+        <span>🤖 AI Career Assistant</span>
+        <button onclick="toggleChat()">✕</button>
+      </div>
+      <div class="chat-messages" id="chatMessages">
+        <div class="msg bot">Hi <strong id="chatGreet">Bharath</strong>! 👋 I'm your AI career assistant. Ask me about
+          careers, skills, or resume tips!</div>
+      </div>
+      <div class="chat-input">
+        <input type="text" id="chatInput" placeholder="Ask me anything..."
+          onkeydown="if(event.key==='Enter') sendChat()">
+        <button onclick="sendChat()">→</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ FOOTER ════════════════════════════ -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-brand">Future<span>PathX</span></div>
+      <p>Empowering students to find their future.</p>
+      <div class="footer-links">
+        <a href="index.html">Dashboard</a>
+        <a href="pages/career-test.html">Career Test</a>
+        <a href="pages/career-explorer.html">Explore Careers</a>
+        <a href="pages/resume-builder.html">Resume Builder</a>
+        <a href="pages/roadmap.html">Roadmap</a>
+        <a href="pages/skill-gap.html">Skill Gap</a>
+        <a href="pages/resources.html">Resources</a>
+      </div>
+      <p class="footer-copy">© 2026 FuturePathX. Built with ❤️ for students.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+
+</html>
