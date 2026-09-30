@@ -55,7 +55,6 @@ By evaluating a user's technical skills, personal interests, domain knowledge, a
 
 - [Key Features](#-key-features)
 - [How It Works](#-how-it-works)
-- [Platform Modules](#-platform-modules)
 - [Recommendation Engine](#-recommendation-engine)
 - [Supported Career Paths](#-supported-career-paths)
 - [Tech Stack](#-tech-stack)
@@ -99,20 +98,20 @@ Generates tailored, ATS-friendly resumes straight from your assessment profile. 
 <tr>
 <td width="33%" valign="top">
 
-### 💰 Salary & Skills Insights
-Every recommended role shows its average salary range in INR and the critical skills to learn.
+### 🎨 Responsive Modern UI
+A clean, interactive interface that feels smooth on desktop, tablet, and mobile.
 
 </td>
 <td width="33%" valign="top">
 
-### ⚡ Live Preview & PDF Export
-Watch your resume update as you type, then download it as a PDF or print it in one click.
+### ⚡ Instant Preview & Export
+Review your resume live, then export it in seconds, ready for immediate applications.
 
 </td>
 <td width="33%" valign="top">
 
-### 🖤 Premium Black & Gold UI
-A polished, responsive dark interface with smooth progress tracking and illustrated question cards.
+### 🔗 One Connected Flow
+Assessment data flows into recommendations, gaps, and resume. One profile, every stage.
 
 </td>
 </tr>
@@ -140,7 +139,7 @@ flowchart LR
 
 | Step | Stage | What Happens |
 |:---:|---|---|
-| **1** | 📝 **Self-Assessment** | A 10-question interactive test captures your personality, skills, interests, and preferences. |
+| **1** | 📝 **Self-Assessment** | An interactive questionnaire captures core skills, domain preferences, and educational background. |
 | **2** | 🧠 **Recommendation Engine** | Inputs are scored against multi-faceted career profiles to compute role alignment. |
 | **3** | 📈 **Skill Gap Analysis** | Exact technical and soft skills needed for full proficiency are highlighted. |
 | **4** | 📄 **Resume Builder** | Details populate a clean, ATS-compliant layout customized to the recommended role. |
@@ -175,22 +174,6 @@ flowchart LR
 
 ---
 
-## 🧩 Platform Modules
-
-Once signed in, the top navigation gives access to everything in one place:
-
-| Module | Purpose |
-|---|---|
-| 🏠 **Dashboard** | Your personal hub and progress overview |
-| 🧪 **Career Test** | 10-question assessment to discover best-fit careers |
-| 🧭 **Explore Careers** | Browse career paths, salaries, and required skills |
-| 📄 **Resume Builder** | Build an ATS-friendly resume with live preview and PDF export |
-| 🗺️ **Roadmap** | Step-by-step path toward your chosen career |
-| 📈 **Skill Gap** | See exactly which skills you still need |
-| 📚 **Resources** | Curated learning material to close your gaps |
-
----
-
 ## 🧠 Recommendation Engine
 
 1. **Input Collection:** Skills, interests, domain familiarity, and academics are captured as a structured profile.
@@ -210,7 +193,7 @@ Skill Gap  (career)  = Required Skills − User Skills
 
 | Domain | Example Roles |
 |---|---|
-| 📊 **Data Science & AI** | Data Scientist • AI / ML Engineer • Data Analyst |
+| 📊 **Data Science** | Data Analyst • Data Scientist • ML Engineer |
 | 🌐 **Web Development** | Frontend • Backend • Full-Stack Developer |
 | 🔐 **Cyber Security** | Security Analyst • Penetration Tester |
 | ☁️ **Cloud Engineering** | Cloud Engineer • DevOps Engineer |
@@ -268,36 +251,18 @@ futurepathx-career-recommender/
 
 ## 📸 Screenshots
 
-A sleek **black & gold** interface, designed to feel premium from the first click.
+> Save screenshots in `docs/screenshots/` and these will render automatically.
 
-### 🔐 1. Create Your Identity
 <div align="center">
-  <img src="docs/screenshots/register.png" alt="Register page" width="380" />
-  <br/><sub><i>Minimal, elegant sign-up. Create an account and get straight into your journey.</i></sub>
-</div>
 
-<br/>
+| 🏠 Landing Page | 📝 Skill Assessment |
+|:---:|:---:|
+| ![Landing](docs/screenshots/landing.png) | ![Assessment](docs/screenshots/assessment.png) |
 
-### 🧪 2. Career Assessment Test
-<div align="center">
-  <img src="docs/screenshots/assessment.png" alt="Career assessment test" width="100%" />
-  <br/><sub><i>A 10-question assessment with a live progress bar, illustrated question cards, and a Back button to revisit answers.</i></sub>
-</div>
+| 🎯 Career Recommendations | 📄 Resume Builder |
+|:---:|:---:|
+| ![Results](docs/screenshots/results.png) | ![Resume](docs/screenshots/resume.png) |
 
-<br/>
-
-### 🎯 3. Career Recommendations
-<div align="center">
-  <img src="docs/screenshots/results.png" alt="Career matches" width="600" />
-  <br/><sub><i>Ranked matches with a "Best Fit" badge, match compatibility %, average salary in INR, and critical skills for each role.</i></sub>
-</div>
-
-<br/>
-
-### 📄 4. Resume Builder
-<div align="center">
-  <img src="docs/screenshots/resume.png" alt="Resume builder" width="100%" />
-  <br/><sub><i>Sectioned form (Personal, Education, Experience, Skills, Projects, Certs) with a live resume preview, PDF download, and print.</i></sub>
 </div>
 
 ---
@@ -359,15 +324,13 @@ FuturePathX is live on **[Render](https://render.com)**. To deploy your own inst
 - [x] 📈 Skill gap analysis
 - [x] 📄 ATS-friendly resume generation
 - [x] ☁️ Live deployment on Render
-- [x] 👤 User registration & login
-- [x] 📥 PDF download & print for resumes
-- [x] 💰 Salary ranges and critical skills per career
 - [ ] 🤖 AI-powered recommendations trained on real job-market data
 - [ ] 🗺️ Personalized learning roadmaps with curated courses per skill gap
 - [ ] 📑 Multiple resume templates with one-click switching
-- [ ] 📄 DOCX resume export
+- [ ] 📥 PDF & DOCX export
 - [ ] 🔍 ATS score checker against a job description
 - [ ] 💼 Live job listings matched to recommended roles
+- [ ] 👤 User accounts & saved profiles
 - [ ] 🌍 Multi-language support
 
 ---
