@@ -1,67 +1,48 @@
-<!--
-═══════════════════════════════════════════════════════════════
-  PREMIUM README TEMPLATE  (black & gold style)
-  Find & replace these placeholders, then delete this comment:
-
-  {{PROJECT_NAME}}      e.g. FuturePathX
-  {{TAGLINE}}           e.g. Career Path Recommender & Resume Builder
-  {{GITHUB_USER}}       e.g. Bharath-B2411
-  {{REPO_NAME}}         e.g. futurepathx-career-recommender
-  {{LIVE_URL}}          e.g. https://your-app.onrender.com
-  {{DEFAULT_BRANCH}}    master or main
-  {{AUTHOR_NAME}}       your name
-  {{LINKEDIN_URL}}      your LinkedIn profile URL
-
-  Tips: swap the skillicons list to match your stack
-  (https://skillicons.dev), replace the typing lines, and
-  keep only the sections that apply to your project.
-═══════════════════════════════════════════════════════════════
--->
-
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=12,14,18,24&height=240&section=header&text={{PROJECT_NAME}}&fontSize=70&fontColor=ffffff&animation=fadeIn&fontAlignY=36&desc={{TAGLINE_URL_ENCODED}}&descAlignY=58&descSize=20" width="100%" alt="{{PROJECT_NAME}} banner" />
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=12,14,18,24&height=240&section=header&text=FuturePathX&fontSize=70&fontColor=ffffff&animation=fadeIn&fontAlignY=36&desc=Career%20Path%20Recommender%20%26%20Integrated%20Resume%20Builder&descAlignY=58&descSize=20" width="100%" alt="FuturePathX banner" />
 
-<a href="{{LIVE_URL}}">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&duration=3000&pause=900&color=00F5A0&center=true&vCenter=true&width=780&height=55&lines=Benefit+one+goes+here+%F0%9F%8E%AF;Benefit+two+goes+here+%F0%9F%93%88;Benefit+three+goes+here+%E2%9A%A1;Your+one-line+promise+%F0%9F%9A%80" alt="Typing animation" />
+<a href="https://futurepathx-career-recommender.onrender.com">
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&duration=3000&pause=900&color=00F5A0&center=true&vCenter=true&width=780&height=55&lines=Discover+the+career+that+fits+you+%F0%9F%8E%AF;Find+your+skill+gaps+instantly+%F0%9F%93%88;Generate+an+ATS-ready+resume+in+seconds+%F0%9F%93%84;From+%22What+should+I+become%3F%22+to+%22Hired%21%22+%F0%9F%9A%80" alt="Typing animation" />
 </a>
 
 <br/>
 
-[![Live Demo](https://img.shields.io/badge/▶_Live-Demo-00f5a0?style=for-the-badge&logo=render&logoColor=black&labelColor=0d1117)]({{LIVE_URL}})
+[![Live Demo](https://img.shields.io/badge/▶_Live-Demo-00f5a0?style=for-the-badge&logo=render&logoColor=black&labelColor=0d1117)](https://futurepathx-career-recommender.onrender.com)
 [![Python](https://img.shields.io/badge/Python-3.8+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![Flask](https://img.shields.io/badge/Flask-Framework-000000?style=for-the-badge&logo=flask&logoColor=white)](https://flask.palletsprojects.com/)
 [![License](https://img.shields.io/badge/License-MIT-22c55e?style=for-the-badge)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-orange?style=for-the-badge)](#-contributing)
 
-![Stars](https://img.shields.io/github/stars/{{GITHUB_USER}}/{{REPO_NAME}}?style=flat-square&logo=github&color=facc15)
-![Forks](https://img.shields.io/github/forks/{{GITHUB_USER}}/{{REPO_NAME}}?style=flat-square&logo=github&color=6e40c9)
-![Issues](https://img.shields.io/github/issues/{{GITHUB_USER}}/{{REPO_NAME}}?style=flat-square&color=ef4444)
-![Last Commit](https://img.shields.io/github/last-commit/{{GITHUB_USER}}/{{REPO_NAME}}?style=flat-square&color=06b6d4)
-![Repo Size](https://img.shields.io/github/repo-size/{{GITHUB_USER}}/{{REPO_NAME}}?style=flat-square&color=22c55e)
-![Top Language](https://img.shields.io/github/languages/top/{{GITHUB_USER}}/{{REPO_NAME}}?style=flat-square&color=3776AB)
+![Stars](https://img.shields.io/github/stars/Bharath-B2411/futurepathx-career-recommender?style=flat-square&logo=github&color=facc15)
+![Forks](https://img.shields.io/github/forks/Bharath-B2411/futurepathx-career-recommender?style=flat-square&logo=github&color=6e40c9)
+![Issues](https://img.shields.io/github/issues/Bharath-B2411/futurepathx-career-recommender?style=flat-square&color=ef4444)
+![Last Commit](https://img.shields.io/github/last-commit/Bharath-B2411/futurepathx-career-recommender?style=flat-square&color=06b6d4)
+![Repo Size](https://img.shields.io/github/repo-size/Bharath-B2411/futurepathx-career-recommender?style=flat-square&color=22c55e)
+![Top Language](https://img.shields.io/github/languages/top/Bharath-B2411/futurepathx-career-recommender?style=flat-square&color=3776AB)
 
 <br/>
 
-### 🌐 [**Live Demo**]({{LIVE_URL}}) &nbsp;•&nbsp; [**Features**](#-key-features) &nbsp;•&nbsp; [**How It Works**](#-how-it-works) &nbsp;•&nbsp; [**Quick Start**](#-quick-start) &nbsp;•&nbsp; [**Roadmap**](#-roadmap) &nbsp;•&nbsp; [**Contribute**](#-contributing)
+### 🌐 [**Live Demo**](https://futurepathx-career-recommender.onrender.com) &nbsp;•&nbsp; [**Features**](#-key-features) &nbsp;•&nbsp; [**How It Works**](#-how-it-works) &nbsp;•&nbsp; [**Quick Start**](#-quick-start) &nbsp;•&nbsp; [**Roadmap**](#-roadmap) &nbsp;•&nbsp; [**Contribute**](#-contributing)
 
 </div>
 
 ---
 
-## ✨ What is {{PROJECT_NAME}}?
+## ✨ What is FuturePathX?
 
-**{{PROJECT_NAME}}** is {{ONE_SENTENCE_DESCRIPTION_OF_WHAT_IT_DOES_AND_WHO_IT_IS_FOR}}.
+**FuturePathX** is an intelligent, end-to-end career guidance platform that bridges the gap between **skill assessment**, **career discovery**, and **job readiness**.
 
-{{SECOND_SENTENCE_ABOUT_HOW_IT_WORKS_AND_THE_VALUE_IT_DELIVERS}}.
+By evaluating a user's technical skills, personal interests, domain knowledge, and academic background, it delivers **personalized career recommendations**, pinpoints **critical skill gaps**, and instantly generates an **ATS-optimized resume** tailored to the target role.
 
-> 💡 **{{CATCHY_LINE}}**
-> &nbsp;&nbsp;&nbsp;**Step one → Step two → Step three → Outcome.**
+> 💡 **One platform. Four steps. Zero guesswork.**
+> &nbsp;&nbsp;&nbsp;**Assess → Match → Close the gaps → Apply.**
 
 <div align="center">
 
-| 🎯 **Pillar 1** | 📈 **Pillar 2** | 📄 **Pillar 3** | ⚡ **Pillar 4** |
+| 🎯 **Match** | 📈 **Analyze** | 📄 **Build** | ⚡ **Export** |
 |:---:|:---:|:---:|:---:|
-| Short phrase | Short phrase | Short phrase | Short phrase |
+| Ranked career paths | Exact skill gaps | ATS-friendly resume | Ready to apply |
 
 </div>
 
@@ -75,6 +56,8 @@
 - [Key Features](#-key-features)
 - [How It Works](#-how-it-works)
 - [Platform Modules](#-platform-modules)
+- [Recommendation Engine](#-recommendation-engine)
+- [Supported Career Paths](#-supported-career-paths)
 - [Tech Stack](#-tech-stack)
 - [Project Structure](#-project-structure)
 - [Screenshots](#-screenshots)
@@ -96,40 +79,40 @@
 <tr>
 <td width="33%" valign="top">
 
-### 🎯 Feature One
-One or two sentences on the benefit.
+### 🎯 Smart Career Matching
+Data-driven scoring evaluates every answer and ranks the career paths that best fit your strengths and interests.
 
 </td>
 <td width="33%" valign="top">
 
-### 📈 Feature Two
-One or two sentences on the benefit.
+### 📈 Skill Gap Analysis
+Pinpoints the exact technical and soft skills missing for your target role, so learning stays focused.
 
 </td>
 <td width="33%" valign="top">
 
-### 📄 Feature Three
-One or two sentences on the benefit.
+### 📄 Integrated Resume Builder
+Generates tailored, ATS-friendly resumes straight from your assessment profile. No re-entering data.
 
 </td>
 </tr>
 <tr>
 <td width="33%" valign="top">
 
-### 💰 Feature Four
-One or two sentences on the benefit.
+### 💰 Salary & Skills Insights
+Every recommended role shows its average salary range in INR and the critical skills to learn.
 
 </td>
 <td width="33%" valign="top">
 
-### ⚡ Feature Five
-One or two sentences on the benefit.
+### ⚡ Live Preview & PDF Export
+Watch your resume update as you type, then download it as a PDF or print it in one click.
 
 </td>
 <td width="33%" valign="top">
 
-### 🖤 Feature Six
-One or two sentences on the benefit.
+### 🖤 Premium Black & Gold UI
+A polished, responsive dark interface with smooth progress tracking and illustrated question cards.
 
 </td>
 </tr>
@@ -141,36 +124,98 @@ One or two sentences on the benefit.
 
 ```mermaid
 flowchart LR
-    A["📝 <b>Step 1</b><br/>Input"] --> B["🧠 <b>Step 2</b><br/>Processing"]
-    B --> C["📊 <b>Step 3</b><br/>Results"]
-    C --> D["⬇️ <b>Step 4</b><br/>Output"]
+    A["📝 <b>Assessment</b><br/>Skills • Interests<br/>Domain • Education"] --> B["🧠 <b>Recommendation Engine</b><br/>Scores profile vs.<br/>career thresholds"]
+    B --> C["📊 <b>Results & Analytics</b><br/>Matched roles +<br/>skill gap breakdown"]
+    C --> D["📄 <b>Resume Builder</b><br/>Pre-populated<br/>ATS-friendly output"]
+    D --> E["⬇️ <b>Export & Apply</b>"]
 
     style A fill:#e3f2fd,stroke:#1976d2,color:#000
     style B fill:#f3e5f5,stroke:#7b1fa2,color:#000
     style C fill:#fff3e0,stroke:#f57c00,color:#000
     style D fill:#e8f5e9,stroke:#388e3c,color:#000
+    style E fill:#fce4ec,stroke:#c2185b,color:#000
 ```
 
 <div align="center">
 
 | Step | Stage | What Happens |
 |:---:|---|---|
-| **1** | 📝 **Stage name** | Describe what happens. |
-| **2** | 🧠 **Stage name** | Describe what happens. |
-| **3** | 📊 **Stage name** | Describe what happens. |
-| **4** | ⬇️ **Stage name** | Describe what happens. |
+| **1** | 📝 **Self-Assessment** | A 10-question interactive test captures your personality, skills, interests, and preferences. |
+| **2** | 🧠 **Recommendation Engine** | Inputs are scored against multi-faceted career profiles to compute role alignment. |
+| **3** | 📈 **Skill Gap Analysis** | Exact technical and soft skills needed for full proficiency are highlighted. |
+| **4** | 📄 **Resume Builder** | Details populate a clean, ATS-compliant layout customized to the recommended role. |
 
 </div>
+
+<details>
+<summary><b>📐 Plain-text architecture diagram</b></summary>
+
+```text
+ ┌──────────────────────────┐
+ │     User Assessment      │  <-- Interactive Skill & Domain Questionnaire
+ └─────────────┬────────────┘
+               │
+               ▼
+ ┌──────────────────────────┐
+ │  Recommendation Engine   │  <-- Scores Profile vs. Career Thresholds
+ └─────────────┬────────────┘
+               │
+               ▼
+ ┌──────────────────────────┐
+ │   Results & Analytics    │  <-- Matched Roles & Skill Gap Breakdown
+ └─────────────┬────────────┘
+               │
+               ▼
+ ┌──────────────────────────┐
+ │ Integrated Resume Builder│  <-- Pre-populated, ATS-Friendly Resume Generation
+ └──────────────────────────┘
+```
+
+</details>
 
 ---
 
 ## 🧩 Platform Modules
 
+Once signed in, the top navigation gives access to everything in one place:
+
 | Module | Purpose |
 |---|---|
-| 🏠 **Module A** | What it does |
-| 🧪 **Module B** | What it does |
-| 📄 **Module C** | What it does |
+| 🏠 **Dashboard** | Your personal hub and progress overview |
+| 🧪 **Career Test** | 10-question assessment to discover best-fit careers |
+| 🧭 **Explore Careers** | Browse career paths, salaries, and required skills |
+| 📄 **Resume Builder** | Build an ATS-friendly resume with live preview and PDF export |
+| 🗺️ **Roadmap** | Step-by-step path toward your chosen career |
+| 📈 **Skill Gap** | See exactly which skills you still need |
+| 📚 **Resources** | Curated learning material to close your gaps |
+
+---
+
+## 🧠 Recommendation Engine
+
+1. **Input Collection:** Skills, interests, domain familiarity, and academics are captured as a structured profile.
+2. **Weighted Scoring:** Each career path defines required skills and interest signals; the profile is scored against each.
+3. **Threshold Matching:** Scores are compared with per-career thresholds to determine alignment.
+4. **Ranking:** Careers are ranked and the top matches are shown with a clear alignment score.
+5. **Gap Computation:** For the chosen role, *skills required* are diffed against *skills possessed* to produce a prioritized learning list.
+
+```text
+Match Score (career) = Σ ( weight(skill) × user_proficiency(skill) ) / Σ weight(skill)
+Skill Gap  (career)  = Required Skills − User Skills
+```
+
+---
+
+## 🧭 Supported Career Paths
+
+| Domain | Example Roles |
+|---|---|
+| 📊 **Data Science & AI** | Data Scientist • AI / ML Engineer • Data Analyst |
+| 🌐 **Web Development** | Frontend • Backend • Full-Stack Developer |
+| 🔐 **Cyber Security** | Security Analyst • Penetration Tester |
+| ☁️ **Cloud Engineering** | Cloud Engineer • DevOps Engineer |
+
+> ➕ Adding a new career is as simple as extending the career dataset. See [Contributing](#-contributing).
 
 ---
 
@@ -197,37 +242,62 @@ flowchart LR
 ## 📁 Project Structure
 
 ```text
-{{REPO_NAME}}/
+futurepathx-career-recommender/
 │
-├── app.py                  # Application entry point & routes
-├── requirements.txt        # Dependencies
-├── Procfile                # Deployment process definition
+├── app.py                  # Flask application entry point & routes
+├── requirements.txt        # Python dependencies
+├── Procfile                # Process definition for deployment
 │
-├── templates/              # HTML templates
+├── templates/              # Jinja2 HTML templates
+│   ├── index.html          # Landing page
+│   ├── assessment.html     # Interactive questionnaire
+│   ├── results.html        # Career matches & skill gap analysis
+│   └── resume.html         # Resume builder & preview
+│
 ├── static/
-│   ├── css/
-│   ├── js/
-│   └── images/
+│   ├── css/                # Stylesheets
+│   ├── js/                 # Client-side scripts
+│   └── images/             # Icons & assets
 │
 └── README.md
 ```
+
+> ⚠️ Adjust this tree to match the actual repository layout.
 
 ---
 
 ## 📸 Screenshots
 
-### 🖼️ 1. Screen Name
+A sleek **black & gold** interface, designed to feel premium from the first click.
+
+### 🔐 1. Create Your Identity
 <div align="center">
-  <img src="docs/screenshots/screen1.png" alt="Screen 1" width="100%" />
-  <br/><sub><i>One-line caption describing this screen.</i></sub>
+  <img src="docs/screenshots/register.png" alt="Register page" width="380" />
+  <br/><sub><i>Minimal, elegant sign-up. Create an account and get straight into your journey.</i></sub>
 </div>
 
 <br/>
 
-### 🖼️ 2. Screen Name
+### 🧪 2. Career Assessment Test
 <div align="center">
-  <img src="docs/screenshots/screen2.png" alt="Screen 2" width="100%" />
-  <br/><sub><i>One-line caption describing this screen.</i></sub>
+  <img src="docs/screenshots/assessment.png" alt="Career assessment test" width="100%" />
+  <br/><sub><i>A 10-question assessment with a live progress bar, illustrated question cards, and a Back button to revisit answers.</i></sub>
+</div>
+
+<br/>
+
+### 🎯 3. Career Recommendations
+<div align="center">
+  <img src="docs/screenshots/results.png" alt="Career matches" width="600" />
+  <br/><sub><i>Ranked matches with a "Best Fit" badge, match compatibility %, average salary in INR, and critical skills for each role.</i></sub>
+</div>
+
+<br/>
+
+### 📄 4. Resume Builder
+<div align="center">
+  <img src="docs/screenshots/resume.png" alt="Resume builder" width="100%" />
+  <br/><sub><i>Sectioned form (Personal, Education, Experience, Skills, Projects, Certs) with a live resume preview, PDF download, and print.</i></sub>
 </div>
 
 ---
@@ -244,8 +314,8 @@ flowchart LR
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/{{GITHUB_USER}}/{{REPO_NAME}}.git
-cd {{REPO_NAME}}
+git clone https://github.com/Bharath-B2411/futurepathx-career-recommender.git
+cd futurepathx-career-recommender
 
 # 2. Create & activate a virtual environment
 python -m venv venv
@@ -265,7 +335,7 @@ Then open **http://127.0.0.1:5000** in your browser. 🎉
 
 ## ☁️ Deployment
 
-Live on **[Render](https://render.com)**. To deploy your own instance:
+FuturePathX is live on **[Render](https://render.com)**. To deploy your own instance:
 
 1. Fork this repository.
 2. On Render, choose **New → Web Service** and connect your fork.
@@ -277,7 +347,7 @@ Live on **[Render](https://render.com)**. To deploy your own instance:
 | **Build Command** | `pip install -r requirements.txt` |
 | **Start Command** | `gunicorn app:app` |
 
-4. Click **Create Web Service**. Every push to `{{DEFAULT_BRANCH}}` redeploys automatically.
+4. Click **Create Web Service**. Every push to `master` redeploys automatically.
 
 > ⏱️ On free-tier hosting, the first request after inactivity may take a few seconds while the server wakes up.
 
@@ -285,11 +355,20 @@ Live on **[Render](https://render.com)**. To deploy your own instance:
 
 ## 🔮 Roadmap
 
-- [x] ✅ Completed feature
-- [x] ✅ Completed feature
-- [ ] 🤖 Planned feature
-- [ ] 📑 Planned feature
-- [ ] 🌍 Planned feature
+- [x] 🎯 Skill assessment & career matching
+- [x] 📈 Skill gap analysis
+- [x] 📄 ATS-friendly resume generation
+- [x] ☁️ Live deployment on Render
+- [x] 👤 User registration & login
+- [x] 📥 PDF download & print for resumes
+- [x] 💰 Salary ranges and critical skills per career
+- [ ] 🤖 AI-powered recommendations trained on real job-market data
+- [ ] 🗺️ Personalized learning roadmaps with curated courses per skill gap
+- [ ] 📑 Multiple resume templates with one-click switching
+- [ ] 📄 DOCX resume export
+- [ ] 🔍 ATS score checker against a job description
+- [ ] 💼 Live job listings matched to recommended roles
+- [ ] 🌍 Multi-language support
 
 ---
 
@@ -310,12 +389,14 @@ git push origin feature/AmazingFeature
 # 4. Open a Pull Request 🎉
 ```
 
+💡 **Good first contributions:** new career profiles, improved scoring logic, extra resume templates, UI polish.
+
 <div align="center">
 
 **Thanks to everyone who has contributed!**
 
-<a href="https://github.com/{{GITHUB_USER}}/{{REPO_NAME}}/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo={{GITHUB_USER}}/{{REPO_NAME}}" alt="Contributors" />
+<a href="https://github.com/Bharath-B2411/futurepathx-career-recommender/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Bharath-B2411/futurepathx-career-recommender" alt="Contributors" />
 </a>
 
 </div>
@@ -325,13 +406,23 @@ git push origin feature/AmazingFeature
 ## ❓ FAQ
 
 <details>
-<summary><b>Question one?</b></summary>
-Answer one.
+<summary><b>Is FuturePathX free to use?</b></summary>
+Yes. The live app is free and open source under the MIT license.
 </details>
 
 <details>
-<summary><b>Question two?</b></summary>
-Answer two.
+<summary><b>What does "ATS-friendly" mean?</b></summary>
+Applicant Tracking Systems parse resumes automatically. FuturePathX uses clean, single-column layouts with standard headings so recruiter software reads your resume correctly.
+</details>
+
+<details>
+<summary><b>Can I add my own career paths?</b></summary>
+Yes. Extend the career dataset with the required skills and thresholds for a new role and the engine picks it up.
+</details>
+
+<details>
+<summary><b>The live demo is slow to load. Why?</b></summary>
+It runs on free-tier hosting, which sleeps after inactivity. Give it a few seconds to wake up.
 </details>
 
 ---
@@ -346,24 +437,26 @@ Distributed under the **MIT License**. See [`LICENSE`](LICENSE) for details.
 
 <div align="center">
 
-**{{AUTHOR_NAME}}**
+**Bharath**
 
-[![GitHub](https://img.shields.io/badge/GitHub-{{GITHUB_USER}}-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/{{GITHUB_USER}})
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)]({{LINKEDIN_URL}})
+[![GitHub](https://img.shields.io/badge/GitHub-Bharath--B2411-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Bharath-B2411)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/YOUR-PROFILE)
 
 <br/>
 
 ### ⭐ Star History
 
-<a href="https://star-history.com/#{{GITHUB_USER}}/{{REPO_NAME}}&Date">
-  <img src="https://api.star-history.com/svg?repos={{GITHUB_USER}}/{{REPO_NAME}}&type=Date" alt="Star History Chart" width="600" />
+<a href="https://star-history.com/#Bharath-B2411/futurepathx-career-recommender&Date">
+  <img src="https://api.star-history.com/svg?repos=Bharath-B2411/futurepathx-career-recommender&type=Date" alt="Star History Chart" width="600" />
 </a>
 
 <br/><br/>
 
-### 💚 If {{PROJECT_NAME}} helped you, give it a star!
+### 💚 If FuturePathX helped you, give it a star!
 
-**[🌐 Try the Live Demo]({{LIVE_URL}})**
+**[🌐 Try the Live Demo](https://futurepathx-career-recommender.onrender.com)**
+
+Built with ❤️ to help students and early-career professionals find their path.
 
 </div>
 
